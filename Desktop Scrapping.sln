@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop Scrapping", "Desktop Scrapping\Desktop Scrapping.csproj", "{345DADD1-A26C-4D42-9196-3BE220BF88AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{345DADD1-A26C-4D42-9196-3BE220BF88AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{345DADD1-A26C-4D42-9196-3BE220BF88AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{345DADD1-A26C-4D42-9196-3BE220BF88AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{345DADD1-A26C-4D42-9196-3BE220BF88AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20A55F54-D9E3-4AB2-9F80-DB96CAAEB48E}
+	EndGlobalSection
+EndGlobal
