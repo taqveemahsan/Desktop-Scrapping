@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenQA.Selenium.Interactions;
+using ClosedXML.Excel;
 
 namespace Desktop_Scrapping
 {
@@ -225,9 +226,9 @@ namespace Desktop_Scrapping
                                         driver1.Navigate().Back();
                                         driver1.Navigate().Back();
                                     }
-                                    catch (Exception e)
+                                    catch (Exception ex)
                                     {
-                                        throw e;
+                                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
 
                                 }
@@ -250,11 +251,37 @@ namespace Desktop_Scrapping
                     Message = "Given Products have value 0";
                 }
 
-            }catch(Exception e)
+            }catch(Exception ex)
             {
-                throw e;
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using(SaveFileDialog sfd=new SaveFileDialog() { Filter="Excel Workbook|*xlsx"})
+            {
+                if(sfd.ShowDialog()==DialogResult.OK)
+                {
+                    try
+                    {
+                        using(XLWorkbook workbook=new XLWorkbook())
+                        {
+                            //workbook.Worksheets.Add(this.model.SellerNameScrapes.CopytoDataTable(), "SellerList");
+                        }
+                        MessageBox.Show("Successfully Created Excel File", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
