@@ -60,7 +60,7 @@ namespace Desktop_Scrapping
                 IWebDriver driver = new ChromeDriver(@"c:/");
                 driver.Url = "https://www.aliexpress.com/";
                 driver.Manage().Window.Minimize();
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
 
                 //Initialize IWEBELEMENTS variables
                 driver.FindElement(By.Id("search-key")).SendKeys(Search_Value + OpenQA.Selenium.Keys.Enter);
@@ -79,7 +79,7 @@ namespace Desktop_Scrapping
                     //Select all Values of Sold List Items
                     for (int i = 0; i < namesList.Count; i++)
                     {
-                        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
                         var curr = ((IJavaScriptExecutor)driver).ExecuteScript("return window.pageYOffset;").ToString();
                         var curr1 = Int32.Parse(curr);
                         ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 900) + ")");
@@ -117,12 +117,15 @@ namespace Desktop_Scrapping
                         //ValueFromInput given by User
                         if (intValueSold >= ValueFromInput)
                         {
-                            if (listNumber > 4)
-                            {
-                                numb++;
-                                listNumber = 1;
+                            //if (listNumber > 4)
+                            //{
+                            //    numb++;
+                            //    listNumber = 1;
 
-                            }
+                            //}
+                            var n = s;
+                            listNumber = (n % 4) + 1;
+                            numb = (n / 4) + 1;
                             //Get specific element name given by user
                             IWebElement ValueName = driver.FindElement(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div[" + numb + "]/li[" + listNumber + "]/div/div[2]/div/div[1]/a"));
                             numb = (s / 4) + 1;
@@ -137,7 +140,7 @@ namespace Desktop_Scrapping
                             //Save all Item names in DataBase
                             model.ItemsNames.Add(items);
                             model.SaveChanges();
-                            listNumber++;
+                            //listNumber++;
 
                         }
                     }
