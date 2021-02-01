@@ -12,10 +12,10 @@ namespace Desktop_Scrapping.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class ItemsName
+    public partial class Brand_Table
     {
-        public int ID { get; set; }
-        public string ItemsName1 { get; set; }
-        public string DateTimes { get; set; }
+        public int Brand_ID { get; set; }
+        public string Brand_Name { get; set; }
+        public int ID_Brand { get; set; }
     }
 }

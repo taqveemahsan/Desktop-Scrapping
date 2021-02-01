@@ -87,6 +87,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Brand_Table.cs">
+      <DependentUpon>ScrappingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Category_Table.cs">
+      <DependentUpon>ScrappingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ItemsName.cs">
       <DependentUpon>ScrappingModel.tt</DependentUpon>
     </Compile>
@@ -113,6 +119,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScrapeTestDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrapeTestDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ScrapeTestDataSetBrandTable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrapeTestDataSetBrandTable.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ScrapeTestDataSetCategories.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrapeTestDataSetCategories.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +145,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EntityDeploy Include="Model\ScrappingModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -142,6 +164,39 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="ScrapeTestDataSet.xsc">
+      <DependentUpon>ScrapeTestDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ScrapeTestDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ScrapeTestDataSet.xss">
+      <DependentUpon>ScrapeTestDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSetBrandTable.xsc">
+      <DependentUpon>ScrapeTestDataSetBrandTable.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSetBrandTable.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ScrapeTestDataSetBrandTable.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ScrapeTestDataSetBrandTable.xss">
+      <DependentUpon>ScrapeTestDataSetBrandTable.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSetCategories.xsc">
+      <DependentUpon>ScrapeTestDataSetCategories.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSetCategories.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ScrapeTestDataSetCategories.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ScrapeTestDataSetCategories.xss">
+      <DependentUpon>ScrapeTestDataSetCategories.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -157,6 +212,11 @@
       <DependentUpon>ScrappingModel.edmx</DependentUpon>
       <LastGenOutput>ScrappingModel.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\f41.PNG" />
+    <None Include="Resources\f4.PNG" />
+    <None Include="Resources\16516.jpg" />
+    <None Include="Resources\ae.png" />
+    <None Include="Resources\72c45dc2a5ac10c49a47b523a4b85422.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

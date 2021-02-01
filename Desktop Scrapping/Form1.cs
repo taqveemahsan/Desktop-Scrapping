@@ -12,20 +12,27 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenQA.Selenium.Interactions;
 using ClosedXML.Excel;
+using System.Data.Entity;
 
 namespace Desktop_Scrapping
 {
-    public partial class Form1 : Form
+    public partial class Taqi : Form
     {
         public IWebDriver driver;
         ScrapeTestEntities model = new ScrapeTestEntities();
-        public Form1()
+        public Taqi()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'scrapeTestDataSetBrandTable.Brand_Table' table. You can move, or remove it, as needed.
+            this.brand_TableTableAdapter.Fill(this.scrapeTestDataSetBrandTable.Brand_Table);
+            // TODO: This line of code loads data into the 'scrapeTestDataSetCategories.Category_Table' table. You can move, or remove it, as needed.
+            this.category_TableTableAdapter.Fill(this.scrapeTestDataSetCategories.Category_Table);
+            // TODO: This line of code loads data into the 'scrapeTestDataSet.SellerNameScrape' table. You can move, or remove it, as needed.
+            this.sellerNameScrapeTableAdapter.Fill(this.scrapeTestDataSet.SellerNameScrape);
 
         }
 
@@ -259,7 +266,7 @@ namespace Desktop_Scrapping
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using(SaveFileDialog sfd=new SaveFileDialog() { Filter="Excel Workbook|*xlsx"})
+            using(SaveFileDialog sfd=new SaveFileDialog() { Filter="Excel Workbook|*.xlsx"})
             {
                 if(sfd.ShowDialog()==DialogResult.OK)
                 {
@@ -268,6 +275,8 @@ namespace Desktop_Scrapping
                         using(XLWorkbook workbook=new XLWorkbook())
                         {
                             //workbook.Worksheets.Add(this.model.SellerNameScrapes.CopytoDataTable(), "SellerList");
+                            workbook.Worksheets.Add(this.scrapeTestDataSet.SellerNameScrape.CopyToDataTable(), "SellerList");
+                            workbook.SaveAs(sfd.FileName);
                         }
                         MessageBox.Show("Successfully Created Excel File", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -283,5 +292,124 @@ namespace Desktop_Scrapping
         {
 
         }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveCategory_Click(object sender, EventArgs e)
+        {
+            var Category_id = Convert.ToInt32(CategoryId.Text);
+            var Category_name = CategoryName.Text;
+            Category_Table table = new Category_Table();
+
+            table.ID_Category = Category_id;
+            table.Category_Name = Category_name;
+
+            model.Category_Table.Add(table);
+            model.SaveChanges();
+            MessageBox.Show("Category Saved Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Save_Brands_Click(object sender, EventArgs e)
+        {
+            var B_ID = Convert.ToInt32(Brand_ID.Text);
+            var B_Name = Brand_Name.Text;
+
+            Brand_Table Btable = new Brand_Table();
+            Btable.ID_Brand = B_ID;
+            Btable.Brand_Name = B_Name;
+
+            model.Brand_Table.Add(Btable);
+            model.SaveChanges();
+
+            MessageBox.Show("Brands Saved Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+
+        private void Del_Category_Btn_Click(object sender, EventArgs e)
+        {
+            var Category_id = Convert.ToInt32(CategoryId.Text);
+
+            Category_Table category_Table = model.Category_Table.Where(a => a.ID_Category == Category_id).FirstOrDefault();
+            model.Category_Table.Remove(category_Table);
+            model.SaveChanges();
+
+            MessageBox.Show("Deleted Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Del_Brand_Btn_Click(object sender, EventArgs e)
+        {
+            var B_ID = Convert.ToInt32(Brand_ID.Text);
+
+            Brand_Table brand_Table = model.Brand_Table.Where(a => a.ID_Brand == B_ID).FirstOrDefault();
+            model.Brand_Table.Remove(brand_Table);
+            model.SaveChanges();
+
+            MessageBox.Show("Deleted Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+
+        private void Category_Edit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var Category_id = Convert.ToInt32(CategoryId.Text);
+
+                Category_Table category_Table = model.Category_Table.Where(a => a.ID_Category == Category_id).FirstOrDefault();
+
+                if (category_Table != null)
+                {
+                    var Category_name = CategoryName.Text;
+                    Category_Table table = new Category_Table();
+
+                    table.ID_Category = Category_id;
+                    table.Category_Name = Category_name;
+
+                    model.Entry(table).State = EntityState.Modified;
+                    model.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Your Id is Mismatched!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Brand_Edit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var B_ID = Convert.ToInt32(Brand_ID.Text);
+
+                Brand_Table brand_Table = model.Brand_Table.Where(a => a.ID_Brand == B_ID).FirstOrDefault();
+
+                if (brand_Table != null)
+                {
+                    var B_Name = Brand_Name.Text;
+
+                    Brand_Table Btable = new Brand_Table();
+                    Btable.ID_Brand = B_ID;
+                    Btable.Brand_Name = B_Name;
+
+                    model.Entry(Btable).State = EntityState.Modified;
+                    model.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Your Id is Mismatched!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
+    
 }

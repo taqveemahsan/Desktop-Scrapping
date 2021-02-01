@@ -5,9 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="162adbf56c644d168aa77bb32d7db9a2" Name="Diagram1">
-        <EntityTypeShape EntityType="ScrapeTestModel.ItemsName" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ScrapeTestModel.ScrapEbay" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ScrapeTestModel.SellerNameScrape" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapeTestModel.Brand_Table" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ScrapeTestModel.Category_Table" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ScrapeTestModel.ItemsName" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ScrapeTestModel.ScrapEbay" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ScrapeTestModel.SellerNameScrape" Width="1.5" PointX="4.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

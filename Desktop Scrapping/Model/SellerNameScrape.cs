@@ -16,5 +16,6 @@ namespace Desktop_Scrapping.Model
     {
         public int ID { get; set; }
         public string SellerName { get; set; }
+        public string DateTimes { get; set; }
     }
 }

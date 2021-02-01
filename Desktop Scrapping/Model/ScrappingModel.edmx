@@ -4,13 +4,30 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ScrapeTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ScrapeTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brand_Table">
+          <Key>
+            <PropertyRef Name="Brand_ID" />
+          </Key>
+          <Property Name="Brand_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand_Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID_Brand" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_Table">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID_Category" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ItemsNames">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemsName" Type="varchar(max)" />
+          <Property Name="DateTimes" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ScrapEbay">
           <Key>
@@ -28,23 +45,49 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SellerName" Type="varchar(max)" />
+          <Property Name="DateTimes" Type="varchar(max)" />
         </EntityType>
         <EntityContainer Name="ScrapeTestModelStoreContainer">
+          <EntitySet Name="Brand_Table" EntityType="Self.Brand_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Table" EntityType="Self.Category_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemsNames" EntityType="Self.ItemsNames" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScrapEbay" EntityType="Self.ScrapEbay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SellerNameScrape" EntityType="Self.SellerNameScrape" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ScrapeTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ScrapeTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brand_Table" EntityType="ScrapeTestModel.Brand_Table" />
+          <EntitySet Name="Category_Table" EntityType="ScrapeTestModel.Category_Table" />
+          <EntitySet Name="ItemsNames" EntityType="ScrapeTestModel.ItemsName" />
+          <EntitySet Name="ScrapEbays" EntityType="ScrapeTestModel.ScrapEbay" />
+          <EntitySet Name="SellerNameScrapes" EntityType="ScrapeTestModel.SellerNameScrape" />
+        </EntityContainer>
+        <EntityType Name="Brand_Table">
+          <Key>
+            <PropertyRef Name="Brand_ID" />
+          </Key>
+          <Property Name="Brand_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Brand" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_Table">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Category" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="ItemsName">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemsName1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateTimes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ScrapEbay">
           <Key>
@@ -62,42 +105,58 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SellerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateTimes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="ScrapeTestEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ItemsNames" EntityType="Self.ItemsName" />
-          <EntitySet Name="ScrapEbays" EntityType="Self.ScrapEbay" />
-          <EntitySet Name="SellerNameScrapes" EntityType="Self.SellerNameScrape" />
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ScrapeTestModelStoreContainer" CdmEntityContainer="ScrapeTestEntities">
+          <EntitySetMapping Name="Brand_Table">
+            <EntityTypeMapping TypeName="ScrapeTestModel.Brand_Table">
+              <MappingFragment StoreEntitySet="Brand_Table">
+                <ScalarProperty Name="ID_Brand" ColumnName="ID_Brand" />
+                <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
+                <ScalarProperty Name="Brand_ID" ColumnName="Brand_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Table">
+            <EntityTypeMapping TypeName="ScrapeTestModel.Category_Table">
+              <MappingFragment StoreEntitySet="Category_Table">
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ItemsNames">
             <EntityTypeMapping TypeName="ScrapeTestModel.ItemsName">
               <MappingFragment StoreEntitySet="ItemsNames">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DateTimes" ColumnName="DateTimes" />
                 <ScalarProperty Name="ItemsName1" ColumnName="ItemsName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ScrapEbays">
             <EntityTypeMapping TypeName="ScrapeTestModel.ScrapEbay">
               <MappingFragment StoreEntitySet="ScrapEbay">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IDofItem" ColumnName="IDofItem" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="IDofItem" ColumnName="IDofItem" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SellerNameScrapes">
             <EntityTypeMapping TypeName="ScrapeTestModel.SellerNameScrape">
               <MappingFragment StoreEntitySet="SellerNameScrape">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DateTimes" ColumnName="DateTimes" />
                 <ScalarProperty Name="SellerName" ColumnName="SellerName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
