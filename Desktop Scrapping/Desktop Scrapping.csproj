@@ -96,6 +96,9 @@
     <Compile Include="Model\ItemsName.cs">
       <DependentUpon>ScrappingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ScrapDataTime.cs">
+      <DependentUpon>ScrappingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ScrapEbay.cs">
       <DependentUpon>ScrappingModel.tt</DependentUpon>
     </Compile>
@@ -115,6 +118,9 @@
       <DependentUpon>ScrappingModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\SellerNameScrape.cs">
+      <DependentUpon>ScrappingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>ScrappingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />

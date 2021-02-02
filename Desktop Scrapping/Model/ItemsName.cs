@@ -16,6 +16,9 @@ namespace Desktop_Scrapping.Model
     {
         public int ID { get; set; }
         public string ItemsName1 { get; set; }
-        public string DateTimes { get; set; }
+        public Nullable<int> ScrapID { get; set; }
+        public string ItemUrl { get; set; }
+    
+        public virtual ScrapDataTime ScrapDataTime { get; set; }
     }
 }
