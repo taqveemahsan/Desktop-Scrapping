@@ -16,11 +16,11 @@ using System.Data.Entity;
 
 namespace Desktop_Scrapping
 {
-    public partial class Taqi : Form
+    public partial class ScrapperPage : Form
     {
         public IWebDriver driver;
         ScrapeTestEntities model = new ScrapeTestEntities();
-        public Taqi()
+        public ScrapperPage()
         {
             InitializeComponent();
         }
@@ -28,11 +28,30 @@ namespace Desktop_Scrapping
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'scrapeTestDataSetBrandTable.Brand_Table' table. You can move, or remove it, as needed.
+           
             this.brand_TableTableAdapter.Fill(this.scrapeTestDataSetBrandTable.Brand_Table);
+           
             // TODO: This line of code loads data into the 'scrapeTestDataSetCategories.Category_Table' table. You can move, or remove it, as needed.
+           
             this.category_TableTableAdapter.Fill(this.scrapeTestDataSetCategories.Category_Table);
+           
             // TODO: This line of code loads data into the 'scrapeTestDataSet.SellerNameScrape' table. You can move, or remove it, as needed.
+           
             this.sellerNameScrapeTableAdapter.Fill(this.scrapeTestDataSet.SellerNameScrape);
+
+            //
+            DataTable dt = new DataTable();
+
+            //Category_Table category_Table = new Category_Table();
+
+            //var name = category_Table.Category_Name;
+
+            var name = from d in model.Category_Table
+                       select d.Category_Name;
+
+
+            checkboxListCat.Items.AddRange(name.ToArray());
+
 
         }
 
@@ -43,9 +62,9 @@ namespace Desktop_Scrapping
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var Item_name = textBox1.Text;
-            var Sold_items = textBox2.Text;
-            var item_pricce = textBox3.Text;
+            var Item_name = txtItemName.Text;
+            var Sold_items = txtSoldItems.Text;
+            var item_pricce = txtMinimumPrice.Text;
             ScrapeData(Item_name, Sold_items);
         }
         public void ScrapeData(string Search_Value = "slicer", string Search_sold = "500")
@@ -300,68 +319,109 @@ namespace Desktop_Scrapping
 
         private void SaveCategory_Click(object sender, EventArgs e)
         {
-            var Category_id = Convert.ToInt32(CategoryId.Text);
-            var Category_name = CategoryName.Text;
-            Category_Table table = new Category_Table();
+            try
+            {
+                var Category_id = Convert.ToInt32(txtCatID.Text);
+                 var Category_name = txtCatName.Text;
+                Category_Table table = new Category_Table();
 
-            table.ID_Category = Category_id;
-            table.Category_Name = Category_name;
+                table.ID_Category = Category_id;
+                table.Category_Name = Category_name;
 
-            model.Category_Table.Add(table);
-            model.SaveChanges();
-            MessageBox.Show("Category Saved Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                model.Category_Table.Add(table);
+                model.SaveChanges();
+                MessageBox.Show("Category Saved Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // TODO: This line of code loads data into the 'scrapeTestDataSetCategories.Category_Table' table. You can move, or remove it, as needed.
+
+                this.category_TableTableAdapter.Fill(this.scrapeTestDataSetCategories.Category_Table);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void Save_Brands_Click(object sender, EventArgs e)
         {
-            var B_ID = Convert.ToInt32(Brand_ID.Text);
-            var B_Name = Brand_Name.Text;
+            try
+            {
+                var B_ID = Convert.ToInt32(txtBrandID.Text);
+                var B_Name = txtBrandName.Text;
 
-            Brand_Table Btable = new Brand_Table();
-            Btable.ID_Brand = B_ID;
-            Btable.Brand_Name = B_Name;
+                Brand_Table Btable = new Brand_Table();
+                Btable.ID_Brand = B_ID;
+                Btable.Brand_Name = B_Name;
 
-            model.Brand_Table.Add(Btable);
-            model.SaveChanges();
+                model.Brand_Table.Add(Btable);
+                model.SaveChanges();
 
-            MessageBox.Show("Brands Saved Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Brands Saved Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
         }
 
         private void Del_Category_Btn_Click(object sender, EventArgs e)
         {
-            var Category_id = Convert.ToInt32(CategoryId.Text);
+            try
+            {
+                var Category_id = Convert.ToInt32(txtCatID.Text);
 
-            Category_Table category_Table = model.Category_Table.Where(a => a.ID_Category == Category_id).FirstOrDefault();
-            model.Category_Table.Remove(category_Table);
-            model.SaveChanges();
+                Category_Table category_Table = model.Category_Table.Where(a => a.ID_Category == Category_id).FirstOrDefault();
+                model.Category_Table.Remove(category_Table);
+                model.SaveChanges();
 
-            MessageBox.Show("Deleted Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Deleted Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // TODO: This line of code loads data into the 'scrapeTestDataSetCategories.Category_Table' table. You can move, or remove it, as needed.
+
+                this.category_TableTableAdapter.Fill(this.scrapeTestDataSetCategories.Category_Table);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void Del_Brand_Btn_Click(object sender, EventArgs e)
         {
-            var B_ID = Convert.ToInt32(Brand_ID.Text);
+            try
+            {
+                var B_ID = Convert.ToInt32(txtBrandID.Text);
 
-            Brand_Table brand_Table = model.Brand_Table.Where(a => a.ID_Brand == B_ID).FirstOrDefault();
-            model.Brand_Table.Remove(brand_Table);
-            model.SaveChanges();
+                Brand_Table brand_Table = model.Brand_Table.Where(a => a.ID_Brand == B_ID).FirstOrDefault();
+                model.Brand_Table.Remove(brand_Table);
+                model.SaveChanges();
 
-            MessageBox.Show("Deleted Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Deleted Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
         }
 
         private void Category_Edit_Click(object sender, EventArgs e)
         {
+            
             try
             {
-                var Category_id = Convert.ToInt32(CategoryId.Text);
+                var Category_id = Convert.ToInt32(txtCatID.Text);
 
                 Category_Table category_Table = model.Category_Table.Where(a => a.ID_Category == Category_id).FirstOrDefault();
 
                 if (category_Table != null)
                 {
-                    var Category_name = CategoryName.Text;
+                    var Category_name = txtCatName.Text;
                     Category_Table table = new Category_Table();
 
                     table.ID_Category = Category_id;
@@ -369,6 +429,11 @@ namespace Desktop_Scrapping
 
                     model.Entry(table).State = EntityState.Modified;
                     model.SaveChanges();
+
+                    MessageBox.Show("Edit Category Successfully..", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // TODO: This line of code loads data into the 'scrapeTestDataSetCategories.Category_Table' table. You can move, or remove it, as needed.
+
+                    this.category_TableTableAdapter.Fill(this.scrapeTestDataSetCategories.Category_Table);
                 }
                 else
                 {
@@ -385,13 +450,13 @@ namespace Desktop_Scrapping
         {
             try
             {
-                var B_ID = Convert.ToInt32(Brand_ID.Text);
+                var B_ID = Convert.ToInt32(txtBrandID.Text);
 
                 Brand_Table brand_Table = model.Brand_Table.Where(a => a.ID_Brand == B_ID).FirstOrDefault();
 
                 if (brand_Table != null)
                 {
-                    var B_Name = Brand_Name.Text;
+                    var B_Name = txtBrandName.Text;
 
                     Brand_Table Btable = new Brand_Table();
                     Btable.ID_Brand = B_ID;
@@ -410,6 +475,29 @@ namespace Desktop_Scrapping
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ScrappingStart_Click(object sender, EventArgs e)
+        {
+
+            string soldPrice = txtSoldValueInput.Text;
+            //string name = checkboxListCat.Text;
+            string minPrice = txtProductMinPrice.Text;
+            string maxPrice = txtProductMaxPrice.Text;
+
+            txtSoldValueInput.ReadOnly = true;
+            txtProductMinPrice.ReadOnly = true;
+            txtProductMaxPrice.ReadOnly = true;
+            foreach (var item in checkboxListCat.SelectedItems)
+            {
+                ScrapeData(item.ToString(), soldPrice);
+            }
+            
+
+
+            //ScrapeData("Women's Fashion", soldPrice);
+        }
+
+
     }
     
 }

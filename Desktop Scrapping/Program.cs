@@ -16,7 +16,7 @@ namespace Desktop_Scrapping
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Taqi());
+            Application.Run(new ScrapperPage());
         }
     }
 }
