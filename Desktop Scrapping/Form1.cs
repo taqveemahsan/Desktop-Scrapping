@@ -93,19 +93,19 @@ namespace Desktop_Scrapping
                 driver = new ChromeDriver(@"c:/");
                 driver.Url = "https://www.aliexpress.com/";
                 driver.Manage().Window.Minimize();
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
                 //Initialize IWEBELEMENTS variables
 
                 driver.FindElement(By.Id("search-key")).SendKeys(Search_Value + OpenQA.Selenium.Keys.Enter);
-                ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
+                //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
                 namesList = driver.FindElements(By.ClassName("item-title"));
                 soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
                 //*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul/div[2]/li[1]/div/div[2]/div/div[7]/div/span/a
-                ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
+                //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
                 var numb = 1;
                 var listNumber = 1;
-                ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
+                //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
 
                 if (soldList.Count != 0)
                 {
@@ -113,10 +113,10 @@ namespace Desktop_Scrapping
 
                     for (int i = 0; i < namesList.Count; i++)
                     {
-                        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+                        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
                         var curr = ((IJavaScriptExecutor)driver).ExecuteScript("return window.pageYOffset;").ToString();
                         var curr1 = Int32.Parse(curr);
-                        ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 900) + ")");
+                        ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 400) + ")");
                         Console.WriteLine(namesList[i].Text);
                         namesList = driver.FindElements(By.ClassName("item-title"));
                         soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
@@ -147,7 +147,7 @@ namespace Desktop_Scrapping
                     {
                         var curr = ((IJavaScriptExecutor)driver).ExecuteScript("return window.pageYOffset;").ToString();
                         var curr1 = Int32.Parse(curr);
-                        ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 900) + ")");
+                        ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 400) + ")");
                         //Console.WriteLine(namesList[i].Text);
                         //soldList = driver.FindElements(By.XPath("sale-value-link"));
                         var soldValue = soldList[s].Text;
@@ -221,6 +221,16 @@ namespace Desktop_Scrapping
                     var total = namesList.Count;
                     var totalSolids = soldList.Count;
                     var listCount = NameProducts.Count;
+
+                    if(listCount != 0)
+                    {
+                        MessageBox.Show("List is Full", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("List is Empty", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
 
                     //Start chromium for Ebay
                     driver1 = new ChromeDriver(@"c:/");
@@ -328,26 +338,7 @@ namespace Desktop_Scrapping
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx" })
-            {
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        using (XLWorkbook workbook = new XLWorkbook())
-                        {
-                            //workbook.Worksheets.Add(this.model.SellerNameScrapes.CopytoDataTable(), "SellerList");
-                            workbook.Worksheets.Add(this.scrapeTestDataSet.SellerNameScrape.CopyToDataTable(), "SellerList");
-                            workbook.SaveAs(sfd.FileName);
-                        }
-                        MessageBox.Show("Successfully Created Excel File", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -577,6 +568,30 @@ namespace Desktop_Scrapping
                 driver1.Close();
             }
             
+        }
+
+        private void btnExportExcell_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx" })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (XLWorkbook workbook = new XLWorkbook())
+                        {
+                            //workbook.Worksheets.Add(this.model.SellerNameScrapes.CopytoDataTable(), "SellerList");
+                            workbook.Worksheets.Add(this.scrapeTestDataSet.SellerNameScrape.CopyToDataTable(), "SellerList");
+                            workbook.SaveAs(sfd.FileName);
+                        }
+                        MessageBox.Show("Successfully Created Excel File", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
     

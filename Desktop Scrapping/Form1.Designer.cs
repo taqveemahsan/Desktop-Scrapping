@@ -58,7 +58,7 @@ namespace Desktop_Scrapping
             this.panel11 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnExportExcell = new System.Windows.Forms.Button();
             this.pnlScrapItemByName = new System.Windows.Forms.TabPage();
             this.panel19 = new System.Windows.Forms.Panel();
             this.GrpBoxItemNameScrap = new System.Windows.Forms.GroupBox();
@@ -428,24 +428,25 @@ namespace Desktop_Scrapping
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.button5);
+            this.panel12.Controls.Add(this.btnExportExcell);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel12.Location = new System.Drawing.Point(644, 0);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(153, 72);
             this.panel12.TabIndex = 1;
             // 
-            // button5
+            // btnExportExcell
             // 
-            this.button5.BackColor = System.Drawing.Color.AliceBlue;
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.Location = new System.Drawing.Point(32, 21);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(98, 35);
-            this.button5.TabIndex = 0;
-            this.button5.Text = "&Export Excel";
-            this.button5.UseVisualStyleBackColor = false;
+            this.btnExportExcell.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnExportExcell.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExportExcell.FlatAppearance.BorderSize = 0;
+            this.btnExportExcell.Location = new System.Drawing.Point(32, 21);
+            this.btnExportExcell.Name = "btnExportExcell";
+            this.btnExportExcell.Size = new System.Drawing.Size(98, 35);
+            this.btnExportExcell.TabIndex = 0;
+            this.btnExportExcell.Text = "&Export Excel";
+            this.btnExportExcell.UseVisualStyleBackColor = false;
+            this.btnExportExcell.Click += new System.EventHandler(this.btnExportExcell_Click);
             // 
             // pnlScrapItemByName
             // 
@@ -1128,7 +1129,7 @@ namespace Desktop_Scrapping
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnExportExcell;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
