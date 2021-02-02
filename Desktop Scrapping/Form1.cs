@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using OpenQA.Selenium.Interactions;
 using ClosedXML.Excel;
 using System.Data.Entity;
+using OpenQA.Selenium.Support.UI;
 
 namespace Desktop_Scrapping
 {
@@ -21,6 +22,7 @@ namespace Desktop_Scrapping
         public IWebDriver driver;
         ScrapeTestEntities model = new ScrapeTestEntities();
         public IWebDriver driver1;
+        ProductsFromEbay ProductsFromEbay = new ProductsFromEbay();
 
 
         public ScrapperPage()
@@ -50,7 +52,8 @@ namespace Desktop_Scrapping
             //var name = category_Table.Category_Name;
 
             var name = from d in model.Category_Table
-                       select d.Category_Name;
+                       select d.Category_Name
+                       ;
 
 
             checkboxListCat.Items.AddRange(name.ToArray());
@@ -82,6 +85,7 @@ namespace Desktop_Scrapping
                 SellerNameScrape sellerNameScrape = new SellerNameScrape();
                 List<string> NameProducts = new List<string>();
                 List<string> sellerName = new List<string>();
+                List<string> prodListFromEbay = new List<string>();
                 IList<IWebElement> namesList;
                 IList<IWebElement> ItemSList;
                 IList<IWebElement> location;
@@ -116,7 +120,7 @@ namespace Desktop_Scrapping
                         driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
                         var curr = ((IJavaScriptExecutor)driver).ExecuteScript("return window.pageYOffset;").ToString();
                         var curr1 = Int32.Parse(curr);
-                        ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 400) + ")");
+                        ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 700) + ")");
                         Console.WriteLine(namesList[i].Text);
                         namesList = driver.FindElements(By.ClassName("item-title"));
                         soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
@@ -124,24 +128,28 @@ namespace Desktop_Scrapping
                     }
                     //totalPages = driver.FindElement(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[3]/div/div[2]/span[1]")).Text;
                     //var pages = totalPages.ToString();
+
                     
-                    ////Find page number from List
-                    //string c = string.Empty;
-                    //var totalPageNumber = 1.00;
+                    string page_count = driver.FindElement(By.ClassName("total-page")).Text;
+                    //Find page number from List
+                    string c = string.Empty;
+                    var totalPageNumber = 1.00;
 
-                    //for (int i = 0; i < pages.Length; i++)
-                    //{
-                    //    if (Char.IsDigit(pages[i]))
-                    //        c += pages[i];
-                    //}
+                    for (int i = 0; i < page_count.Length; i++)
+                    {
+                        if (Char.IsDigit(page_count[i]))
+                            c += page_count[i];
+                    }
 
-                    //if (c.Length > 0)
-                    //    totalPageNumber = Int32.Parse(c);
-
+                    if (c.Length > 0)
+                        totalPageNumber = Int32.Parse(c);
 
                     ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
 
                     //Check first Condition if user add sold item value and get all items list from Ali Express
+                    
+                    //for(int ipage_iterator = 1; ipage_iterator <= 1; ipage_iterator++)
+                    //{
 
                     for (int s = 0; s < soldList.Count; s++)
                     {
@@ -205,7 +213,12 @@ namespace Desktop_Scrapping
 
                         }
                     }
+                        //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                        //ExpectedConditions.InvisibilityOfElementLocated(By.ClassName("next-btn"));
 
+                        //driver.FindElement(By.ClassName("next-btn")).SendKeys(OpenQA.Selenium.Keys.Enter);
+
+                    //}
 
 
 
@@ -233,10 +246,9 @@ namespace Desktop_Scrapping
 
 
                     //Start chromium for Ebay
-                    driver1 = new ChromeDriver(@"c:/");
-                    driver1.Url = "https://www.ebay.com/";
-                    driver1.Manage().Window.Minimize();
-                    driver1.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    driver.Url = "https://www.ebay.com/";
+                    driver.Manage().Window.Minimize();
+                    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
                     if (listCount != 0)
                     {
                         //Search and Gets all Products one by one from list
@@ -249,8 +261,8 @@ namespace Desktop_Scrapping
                             var WordsArray = name.Split();
                             string Items = WordsArray[0] + ' ' + WordsArray[1] + ' ' + WordsArray[2];
                             //IEnumerable<string> words = name.Split(new char[] { ' ' }, 2).Take(5);
-                            driver1.FindElement(By.Id("gh-ac")).SendKeys(Items + OpenQA.Selenium.Keys.Enter);
-                            location = driver1.FindElements(By.ClassName("s-item__location"));
+                            driver.FindElement(By.Id("gh-ac")).SendKeys(Items + OpenQA.Selenium.Keys.Enter);
+                            location = driver.FindElements(By.ClassName("s-item__location"));
 
                             //Gets locations of the values given in products search
 
@@ -260,7 +272,7 @@ namespace Desktop_Scrapping
                                 var curr1 = Int32.Parse(curr);
                                 ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 900) + ")");
                                 Console.WriteLine(location[j].Text);
-                                location = driver1.FindElements(By.ClassName("s-item__location"));
+                                location = driver.FindElements(By.ClassName("s-item__location"));
 
                             }
                             var locationItem = location.Count;
@@ -273,7 +285,7 @@ namespace Desktop_Scrapping
                                 var curr1 = Int32.Parse(curr);
                                 ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 900) + ")");
                                 //Console.WriteLine(location[k].Text);
-                                location = driver1.FindElements(By.ClassName("s-item__location"));
+                                location = driver.FindElements(By.ClassName("s-item__location"));
                                 var locationName = location[k].Text;
                                 locationName.ToString();
                                 var num = k + 1;
@@ -281,10 +293,22 @@ namespace Desktop_Scrapping
                                 {
                                     try
                                     {
-                                        driver1.FindElement(By.XPath("//*[@id='srp-river-results']/ul/li[" + num + "]/div/div[2]/a")).Click();
-                                        driver1.FindElement(By.ClassName("mbg-nw")).Click();
+                                        driver.FindElement(By.XPath("//*[@id='srp-river-results']/ul/li[" + num + "]/div/div[2]/a")).Click();
+                                        var productName = driver.FindElement(By.Id("itemTitle")).Text;
+                                        productName = productName.ToString();
+
+                                        prodListFromEbay.Add(productName);
+                                        ProductsFromEbay.ProductsName = productName;
+
+                                        model.ProductsFromEbays.Add(ProductsFromEbay);
+                                        model.SaveChanges();
+
+                                        
+
+
+                                        driver.FindElement(By.ClassName("mbg-nw")).Click();
                                         //*[@id="RightSummaryPanel"]/div[3]/div/div/div/div[1]/div[1]/a
-                                        var locationOfSeller = driver1.FindElement(By.ClassName("mem_loc"));
+                                        var locationOfSeller = driver.FindElement(By.ClassName("mem_loc"));
                                         var TextSeller = locationOfSeller.Text;
                                         var locationOfSellers = TextSeller.ToString();
 
@@ -292,7 +316,7 @@ namespace Desktop_Scrapping
 
                                         if (locationOfSellers != "China")
                                         {
-                                            IWebElement SellerName1 = driver1.FindElement(By.ClassName("mbg-id"));
+                                            IWebElement SellerName1 = driver.FindElement(By.ClassName("mbg-id"));
                                             sellerName.Add(SellerName1.Text);
                                             sellerNameScrape.SellerName = SellerName1.Text;
 
@@ -302,8 +326,8 @@ namespace Desktop_Scrapping
                                             model.SaveChanges();
 
                                         }
-                                        driver1.Navigate().Back();
-                                        driver1.Navigate().Back();
+                                        driver.Navigate().Back();
+                                        driver.Navigate().Back();
                                     }
                                     catch (Exception ex)
                                     {
@@ -314,16 +338,22 @@ namespace Desktop_Scrapping
 
                             }
 
-                            driver1.Url = "https://www.ebay.com/";
+                            driver.Url = "https://www.ebay.com/";
                         }
                     }
                     else
                     {
                         Message = "There are no Items in list which is greator than " + Search_sold;
                     }
-
+                    if (prodListFromEbay.Count != 0)
+                    {
+                        MessageBox.Show("Products are Exist in List Kindly Take All in Excel Sheet", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("List is Empty", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     driver.Quit();
-                    driver1.Quit();
                 }
                 else
                 {

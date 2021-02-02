@@ -19,7 +19,8 @@
           </Key>
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Category_Name" Type="varchar(max)" Nullable="false" />
-          <Property Name="ID_Category" Type="int" Nullable="false" />
+          <Property Name="ID_Category" Type="int" />
+          <Property Name="UrlCategory" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ItemsNames">
           <Key>
@@ -29,6 +30,13 @@
           <Property Name="ItemsName" Type="varchar(max)" />
           <Property Name="ScrapID" Type="int" />
           <Property Name="ItemUrl" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ProductsFromEbay">
+          <Key>
+            <PropertyRef Name="ProductsID" />
+          </Key>
+          <Property Name="ProductsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductsName" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ScrapDataTime">
           <Key>
@@ -94,6 +102,7 @@
           <EntitySet Name="Brand_Table" EntityType="Self.Brand_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category_Table" EntityType="Self.Category_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemsNames" EntityType="Self.ItemsNames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductsFromEbay" EntityType="Self.ProductsFromEbay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScrapDataTime" EntityType="Self.ScrapDataTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScrapEbay" EntityType="Self.ScrapEbay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SellerNameScrape" EntityType="Self.SellerNameScrape" Schema="dbo" store:Type="Tables" />
@@ -115,6 +124,7 @@
           <EntitySet Name="Brand_Table" EntityType="ScrapeTestModel.Brand_Table" />
           <EntitySet Name="Category_Table" EntityType="ScrapeTestModel.Category_Table" />
           <EntitySet Name="ItemsNames" EntityType="ScrapeTestModel.ItemsName" />
+          <EntitySet Name="ProductsFromEbays" EntityType="ScrapeTestModel.ProductsFromEbay" />
           <EntitySet Name="ScrapDataTimes" EntityType="ScrapeTestModel.ScrapDataTime" />
           <EntitySet Name="ScrapEbays" EntityType="ScrapeTestModel.ScrapEbay" />
           <EntitySet Name="SellerNameScrapes" EntityType="ScrapeTestModel.SellerNameScrape" />
@@ -142,7 +152,8 @@
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ID_Category" Type="Int32" Nullable="false" />
+          <Property Name="ID_Category" Type="Int32" />
+          <Property Name="UrlCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ItemsName">
           <Key>
@@ -153,6 +164,13 @@
           <Property Name="ScrapID" Type="Int32" />
           <Property Name="ItemUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ScrapDataTime" Relationship="ScrapeTestModel.FK_ItemsNames_ScrapDataTime" FromRole="ItemsName" ToRole="ScrapDataTime" />
+        </EntityType>
+        <EntityType Name="ProductsFromEbay">
+          <Key>
+            <PropertyRef Name="ProductsID" />
+          </Key>
+          <Property Name="ProductsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductsName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ScrapDataTime">
           <Key>
@@ -235,6 +253,7 @@
           <EntitySetMapping Name="Category_Table">
             <EntityTypeMapping TypeName="ScrapeTestModel.Category_Table">
               <MappingFragment StoreEntitySet="Category_Table">
+                <ScalarProperty Name="UrlCategory" ColumnName="UrlCategory" />
                 <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
                 <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -248,6 +267,14 @@
                 <ScalarProperty Name="ScrapID" ColumnName="ScrapID" />
                 <ScalarProperty Name="ItemsName1" ColumnName="ItemsName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductsFromEbays">
+            <EntityTypeMapping TypeName="ScrapeTestModel.ProductsFromEbay">
+              <MappingFragment StoreEntitySet="ProductsFromEbay">
+                <ScalarProperty Name="ProductsName" ColumnName="ProductsName" />
+                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

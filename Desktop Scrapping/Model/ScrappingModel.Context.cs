@@ -28,6 +28,7 @@ namespace Desktop_Scrapping.Model
         public virtual DbSet<Brand_Table> Brand_Table { get; set; }
         public virtual DbSet<Category_Table> Category_Table { get; set; }
         public virtual DbSet<ItemsName> ItemsNames { get; set; }
+        public virtual DbSet<ProductsFromEbay> ProductsFromEbays { get; set; }
         public virtual DbSet<ScrapDataTime> ScrapDataTimes { get; set; }
         public virtual DbSet<ScrapEbay> ScrapEbays { get; set; }
         public virtual DbSet<SellerNameScrape> SellerNameScrapes { get; set; }

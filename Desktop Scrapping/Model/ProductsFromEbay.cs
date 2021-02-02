@@ -12,11 +12,9 @@ namespace Desktop_Scrapping.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Category_Table
+    public partial class ProductsFromEbay
     {
-        public int CategoryID { get; set; }
-        public string Category_Name { get; set; }
-        public Nullable<int> ID_Category { get; set; }
-        public string UrlCategory { get; set; }
+        public int ProductsID { get; set; }
+        public string ProductsName { get; set; }
     }
 }

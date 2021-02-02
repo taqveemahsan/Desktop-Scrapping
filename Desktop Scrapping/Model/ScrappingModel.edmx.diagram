@@ -7,11 +7,12 @@
       <Diagram DiagramId="162adbf56c644d168aa77bb32d7db9a2" Name="Diagram1">
         <EntityTypeShape EntityType="ScrapeTestModel.Brand_Table" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="ScrapeTestModel.Category_Table" Width="1.5" PointX="5.75" PointY="3.75" />
-        <EntityTypeShape EntityType="ScrapeTestModel.ItemsName" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="ScrapeTestModel.ItemsName" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="ScrapeTestModel.ProductsFromEbay" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="ScrapeTestModel.ScrapDataTime" Width="1.5" PointX="0.75" PointY="2.5" />
-        <EntityTypeShape EntityType="ScrapeTestModel.ScrapEbay" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="ScrapeTestModel.SellerNameScrape" Width="1.5" PointX="3" PointY="3.75" />
-        <EntityTypeShape EntityType="ScrapeTestModel.sysdiagram" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ScrapeTestModel.ScrapEbay" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ScrapeTestModel.SellerNameScrape" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="ScrapeTestModel.sysdiagram" Width="1.5" PointX="4.75" PointY="6.75" />
         <AssociationConnector Association="ScrapeTestModel.FK_ItemsNames_ScrapDataTime" />
         <AssociationConnector Association="ScrapeTestModel.FK_SellerNameScrape_ScrapDataTime" />
       </Diagram>

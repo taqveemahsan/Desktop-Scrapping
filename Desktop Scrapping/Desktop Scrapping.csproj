@@ -96,6 +96,9 @@
     <Compile Include="Model\ItemsName.cs">
       <DependentUpon>ScrappingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ProductsFromEbay.cs">
+      <DependentUpon>ScrappingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ScrapDataTime.cs">
       <DependentUpon>ScrappingModel.tt</DependentUpon>
     </Compile>
