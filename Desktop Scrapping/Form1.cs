@@ -35,6 +35,10 @@ namespace Desktop_Scrapping
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            tabControl.TabPages.Remove(tabCategories);
+            tabControl.TabPages.Remove(tabHome);
+            tabControl.TabPages.Remove(tabScrapItemByName);
+
             // TODO: This line of code loads data into the 'scrapeTestDataSet3.SellerNameScrape' table. You can move, or remove it, as needed.
             this.sellerNameScrapeTableAdapter1.Fill(this.scrapeTestDataSet3.SellerNameScrape);
             // TODO: This line of code loads data into the 'scrapeTestDataSet2.ProductsFromEbay' table. You can move, or remove it, as needed.
@@ -106,18 +110,13 @@ namespace Desktop_Scrapping
                 //Initialize IWEBELEMENTS variables
 
                 //driver.FindElement(By.Id("search-key")).SendKeys(Search_Value + OpenQA.Selenium.Keys.Enter);
-                //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
 
                 namesList = driver.FindElements(By.ClassName("item-title"));
                 soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
                 
-                //*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul/div[2]/li[1]/div/div[2]/div/div[7]/div/span/a
-                //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
-
                 var numb = 1;
                 var listNumber = 1;
 
-                //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
 
                 if (soldList.Count != 0)
                 {
@@ -129,7 +128,6 @@ namespace Desktop_Scrapping
                         var curr = ((IJavaScriptExecutor)driver).ExecuteScript("return window.pageYOffset;").ToString();
                         var curr1 = Int32.Parse(curr);
                         ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 700) + ")");
-                        Console.WriteLine(namesList[i].Text);
                         namesList = driver.FindElements(By.ClassName("item-title"));
                         soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
 

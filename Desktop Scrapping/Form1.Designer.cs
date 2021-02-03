@@ -57,7 +57,7 @@ namespace Desktop_Scrapping
             this.label7 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
             this.btnExportExcell = new System.Windows.Forms.Button();
-            this.pnlScrapItemByName = new System.Windows.Forms.TabPage();
+            this.tabScrapItemByName = new System.Windows.Forms.TabPage();
             this.panel19 = new System.Windows.Forms.Panel();
             this.GrpBoxItemNameScrap = new System.Windows.Forms.GroupBox();
             this.txtMinimumPrice = new System.Windows.Forms.TextBox();
@@ -119,7 +119,7 @@ namespace Desktop_Scrapping
             this.brandNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Brand_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtBrandID = new System.Windows.Forms.TextBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabReport = new System.Windows.Forms.TabPage();
             this.panel15 = new System.Windows.Forms.Panel();
             this.panel20 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -163,7 +163,7 @@ namespace Desktop_Scrapping
             this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
-            this.pnlScrapItemByName.SuspendLayout();
+            this.tabScrapItemByName.SuspendLayout();
             this.panel19.SuspendLayout();
             this.GrpBoxItemNameScrap.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -185,7 +185,7 @@ namespace Desktop_Scrapping
             ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSetCategories)).BeginInit();
             this.tabHome.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabReport.SuspendLayout();
             this.panel15.SuspendLayout();
             this.panel20.SuspendLayout();
             this.tabReports.SuspendLayout();
@@ -233,11 +233,11 @@ namespace Desktop_Scrapping
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabScrapCat);
-            this.tabControl.Controls.Add(this.pnlScrapItemByName);
+            this.tabControl.Controls.Add(this.tabScrapItemByName);
             this.tabControl.Controls.Add(this.tabBrands);
             this.tabControl.Controls.Add(this.tabCategories);
             this.tabControl.Controls.Add(this.tabHome);
-            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabReport);
             this.tabControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl.Location = new System.Drawing.Point(0, 3);
             this.tabControl.Name = "tabControl";
@@ -480,19 +480,19 @@ namespace Desktop_Scrapping
             this.btnExportExcell.UseVisualStyleBackColor = false;
             this.btnExportExcell.Click += new System.EventHandler(this.btnExportExcell_Click);
             // 
-            // pnlScrapItemByName
+            // tabScrapItemByName
             // 
-            this.pnlScrapItemByName.Controls.Add(this.panel19);
-            this.pnlScrapItemByName.Controls.Add(this.lblScrapNameItemsInfo);
-            this.pnlScrapItemByName.Controls.Add(this.panel18);
-            this.pnlScrapItemByName.Controls.Add(this.panel9);
-            this.pnlScrapItemByName.Location = new System.Drawing.Point(4, 22);
-            this.pnlScrapItemByName.Name = "pnlScrapItemByName";
-            this.pnlScrapItemByName.Padding = new System.Windows.Forms.Padding(3);
-            this.pnlScrapItemByName.Size = new System.Drawing.Size(797, 503);
-            this.pnlScrapItemByName.TabIndex = 4;
-            this.pnlScrapItemByName.Text = "Scrap Through Name";
-            this.pnlScrapItemByName.UseVisualStyleBackColor = true;
+            this.tabScrapItemByName.Controls.Add(this.panel19);
+            this.tabScrapItemByName.Controls.Add(this.lblScrapNameItemsInfo);
+            this.tabScrapItemByName.Controls.Add(this.panel18);
+            this.tabScrapItemByName.Controls.Add(this.panel9);
+            this.tabScrapItemByName.Location = new System.Drawing.Point(4, 22);
+            this.tabScrapItemByName.Name = "tabScrapItemByName";
+            this.tabScrapItemByName.Padding = new System.Windows.Forms.Padding(3);
+            this.tabScrapItemByName.Size = new System.Drawing.Size(797, 466);
+            this.tabScrapItemByName.TabIndex = 4;
+            this.tabScrapItemByName.Text = "Scrap Through Name";
+            this.tabScrapItemByName.UseVisualStyleBackColor = true;
             // 
             // panel19
             // 
@@ -614,7 +614,7 @@ namespace Desktop_Scrapping
             this.panel18.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel18.Location = new System.Drawing.Point(3, 75);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(198, 425);
+            this.panel18.Size = new System.Drawing.Size(198, 388);
             this.panel18.TabIndex = 28;
             // 
             // panel9
@@ -681,7 +681,7 @@ namespace Desktop_Scrapping
             this.tabBrands.Location = new System.Drawing.Point(4, 22);
             this.tabBrands.Name = "tabBrands";
             this.tabBrands.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBrands.Size = new System.Drawing.Size(797, 503);
+            this.tabBrands.Size = new System.Drawing.Size(797, 466);
             this.tabBrands.TabIndex = 2;
             this.tabBrands.Text = "Skip Brands KeyWords";
             // 
@@ -802,7 +802,7 @@ namespace Desktop_Scrapping
             this.panel13.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel13.Location = new System.Drawing.Point(3, 75);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(198, 425);
+            this.panel13.Size = new System.Drawing.Size(198, 388);
             this.panel13.TabIndex = 22;
             // 
             // panel7
@@ -846,7 +846,7 @@ namespace Desktop_Scrapping
             this.tabCategories.Location = new System.Drawing.Point(4, 22);
             this.tabCategories.Name = "tabCategories";
             this.tabCategories.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCategories.Size = new System.Drawing.Size(797, 503);
+            this.tabCategories.Size = new System.Drawing.Size(797, 466);
             this.tabCategories.TabIndex = 1;
             this.tabCategories.Text = "Categories";
             // 
@@ -941,7 +941,7 @@ namespace Desktop_Scrapping
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(3, 75);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(198, 425);
+            this.panel6.Size = new System.Drawing.Size(198, 388);
             this.panel6.TabIndex = 21;
             // 
             // panel4
@@ -1020,7 +1020,7 @@ namespace Desktop_Scrapping
             this.tabHome.Location = new System.Drawing.Point(4, 22);
             this.tabHome.Name = "tabHome";
             this.tabHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHome.Size = new System.Drawing.Size(797, 503);
+            this.tabHome.Size = new System.Drawing.Size(797, 466);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Home";
             // 
@@ -1031,7 +1031,7 @@ namespace Desktop_Scrapping
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(791, 497);
+            this.panel2.Size = new System.Drawing.Size(791, 460);
             this.panel2.TabIndex = 0;
             // 
             // label5
@@ -1093,18 +1093,18 @@ namespace Desktop_Scrapping
             this.txtBrandID.TabIndex = 13;
             this.txtBrandID.Visible = false;
             // 
-            // tabPage1
+            // tabReport
             // 
-            this.tabPage1.Controls.Add(this.tabReports);
-            this.tabPage1.Controls.Add(this.panel21);
-            this.tabPage1.Controls.Add(this.panel15);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(797, 503);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabReport.Controls.Add(this.tabReports);
+            this.tabReport.Controls.Add(this.panel21);
+            this.tabReport.Controls.Add(this.panel15);
+            this.tabReport.Location = new System.Drawing.Point(4, 22);
+            this.tabReport.Name = "tabReport";
+            this.tabReport.Padding = new System.Windows.Forms.Padding(3);
+            this.tabReport.Size = new System.Drawing.Size(797, 466);
+            this.tabReport.TabIndex = 5;
+            this.tabReport.Text = "Reports";
+            this.tabReport.UseVisualStyleBackColor = true;
             // 
             // panel15
             // 
@@ -1143,7 +1143,7 @@ namespace Desktop_Scrapping
             this.panel21.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel21.Location = new System.Drawing.Point(3, 75);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(198, 425);
+            this.panel21.Size = new System.Drawing.Size(198, 388);
             this.panel21.TabIndex = 23;
             // 
             // tabReports
@@ -1386,9 +1386,9 @@ namespace Desktop_Scrapping
             // progressBar
             // 
             this.progressBar.BackColor = System.Drawing.SystemColors.Desktop;
-            this.progressBar.Location = new System.Drawing.Point(9, 0);
+            this.progressBar.Location = new System.Drawing.Point(0, 0);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(698, 31);
+            this.progressBar.Size = new System.Drawing.Size(805, 31);
             this.progressBar.TabIndex = 0;
             // 
             // TimerProgressBar
@@ -1421,8 +1421,8 @@ namespace Desktop_Scrapping
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.panel12.ResumeLayout(false);
-            this.pnlScrapItemByName.ResumeLayout(false);
-            this.pnlScrapItemByName.PerformLayout();
+            this.tabScrapItemByName.ResumeLayout(false);
+            this.tabScrapItemByName.PerformLayout();
             this.panel19.ResumeLayout(false);
             this.GrpBoxItemNameScrap.ResumeLayout(false);
             this.GrpBoxItemNameScrap.PerformLayout();
@@ -1451,7 +1451,7 @@ namespace Desktop_Scrapping
             this.tabHome.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
+            this.tabReport.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
             this.panel20.ResumeLayout(false);
             this.panel20.PerformLayout();
@@ -1512,7 +1512,7 @@ namespace Desktop_Scrapping
         private System.Windows.Forms.Label lblEnterSoldPro;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TabPage pnlScrapItemByName;
+        private System.Windows.Forms.TabPage tabScrapItemByName;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblCatName;
         private System.Windows.Forms.Label lblCatID;
@@ -1562,7 +1562,7 @@ namespace Desktop_Scrapping
         private System.Windows.Forms.DataGridViewTextBoxColumn brandNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Brand_ID;
         private System.Windows.Forms.TextBox txtBrandID;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabReport;
         private System.Windows.Forms.TabControl tabReports;
         private System.Windows.Forms.TabPage tabPdtAliExp;
         private System.Windows.Forms.Button btnPdtExportAliExpReport;
