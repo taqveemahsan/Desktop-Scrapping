@@ -73,7 +73,7 @@ namespace Desktop_Scrapping
             var item_pricce = txtMinimumPrice.Text;
             ScrapeData(Item_name, Sold_items);
         }
-        public void ScrapeData(string Search_Value = "slicer", string Search_sold = "500")
+        public void ScrapeData(string Search_Url = "slicer", string Search_sold = "500")
         {
             try
             {
@@ -95,13 +95,13 @@ namespace Desktop_Scrapping
                 //Open CHromium and Get First Values
 
                 driver = new ChromeDriver(@"c:/");
-                driver.Url = "https://www.aliexpress.com/";
+                driver.Url = Search_Url;
                 driver.Manage().Window.Minimize();
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
                 //Initialize IWEBELEMENTS variables
 
-                driver.FindElement(By.Id("search-key")).SendKeys(Search_Value + OpenQA.Selenium.Keys.Enter);
+                //driver.FindElement(By.Id("search-key")).SendKeys(Search_Value + OpenQA.Selenium.Keys.Enter);
                 //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
                 namesList = driver.FindElements(By.ClassName("item-title"));
                 soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
@@ -360,7 +360,7 @@ namespace Desktop_Scrapping
                     Message = "Given Products have value 0";
                 }
 
-            } catch (Exception ex)
+            }  catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -567,8 +567,12 @@ namespace Desktop_Scrapping
                 {
                     if(checkboxListCat.GetItemChecked(i) == true)
                     {
+                        
                         string str = (string)checkboxListCat.Items[i];
-                        ScrapeData(str, soldPrice);
+                        Category_Table category_Table= model.Category_Table.Where(a => a.Category_Name == str).FirstOrDefault();
+                        string url=category_Table.UrlCategory;
+                        url = url.ToString();
+                        ScrapeData(url, soldPrice);
 
                     }
                 }
