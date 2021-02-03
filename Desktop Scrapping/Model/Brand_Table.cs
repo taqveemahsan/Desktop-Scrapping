@@ -16,6 +16,5 @@ namespace Desktop_Scrapping.Model
     {
         public int Brand_ID { get; set; }
         public string Brand_Name { get; set; }
-        public int ID_Brand { get; set; }
     }
 }

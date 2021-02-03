@@ -52,7 +52,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.5.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
       <Private>True</Private>
@@ -61,8 +66,20 @@
     <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.5.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -133,6 +150,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ScrapeTestDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ScrapeTestDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrapeTestDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ScrapeTestDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrapeTestDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ScrapeTestDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrapeTestDataSet3.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ScrapeTestDataSetBrandTable.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,6 +215,39 @@
     </None>
     <None Include="ScrapeTestDataSet.xss">
       <DependentUpon>ScrapeTestDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSet1.xsc">
+      <DependentUpon>ScrapeTestDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ScrapeTestDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ScrapeTestDataSet1.xss">
+      <DependentUpon>ScrapeTestDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSet2.xsc">
+      <DependentUpon>ScrapeTestDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ScrapeTestDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ScrapeTestDataSet2.xss">
+      <DependentUpon>ScrapeTestDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSet3.xsc">
+      <DependentUpon>ScrapeTestDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="ScrapeTestDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ScrapeTestDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ScrapeTestDataSet3.xss">
+      <DependentUpon>ScrapeTestDataSet3.xsd</DependentUpon>
     </None>
     <None Include="ScrapeTestDataSetBrandTable.xsc">
       <DependentUpon>ScrapeTestDataSetBrandTable.xsd</DependentUpon>

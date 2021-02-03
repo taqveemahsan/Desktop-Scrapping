@@ -14,11 +14,14 @@ using OpenQA.Selenium.Interactions;
 using ClosedXML.Excel;
 using System.Data.Entity;
 using OpenQA.Selenium.Support.UI;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Desktop_Scrapping
 {
     public partial class ScrapperPage : Form
     {
+        static String constr = "Data Source=(local);Initial Catalog = ScrapeTest; Integrated Security = True";
         public IWebDriver driver;
         ScrapeTestEntities model = new ScrapeTestEntities();
         public IWebDriver driver1;
@@ -32,6 +35,12 @@ namespace Desktop_Scrapping
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'scrapeTestDataSet3.SellerNameScrape' table. You can move, or remove it, as needed.
+            this.sellerNameScrapeTableAdapter1.Fill(this.scrapeTestDataSet3.SellerNameScrape);
+            // TODO: This line of code loads data into the 'scrapeTestDataSet2.ProductsFromEbay' table. You can move, or remove it, as needed.
+            this.productsFromEbayTableAdapter.Fill(this.scrapeTestDataSet2.ProductsFromEbay);
+            // TODO: This line of code loads data into the 'scrapeTestDataSet1.ItemsNames' table. You can move, or remove it, as needed.
+            this.itemsNamesTableAdapter.Fill(this.scrapeTestDataSet1.ItemsNames);
             // TODO: This line of code loads data into the 'scrapeTestDataSetBrandTable.Brand_Table' table. You can move, or remove it, as needed.
 
             this.brand_TableTableAdapter.Fill(this.scrapeTestDataSetBrandTable.Brand_Table);
@@ -44,17 +53,12 @@ namespace Desktop_Scrapping
 
             this.sellerNameScrapeTableAdapter.Fill(this.scrapeTestDataSet.SellerNameScrape);
 
-            //
-            DataTable dt = new DataTable();
-
-            //Category_Table category_Table = new Category_Table();
-
-            //var name = category_Table.Category_Name;
+            //Add Scrap ID
+            txtScrapID.Text = RecentID().ToString();
+            txtScrapID.ReadOnly = true;
 
             var name = from d in model.Category_Table
-                       select d.Category_Name
-                       ;
-
+                       select d.Category_Name;
 
             checkboxListCat.Items.AddRange(name.ToArray());
 
@@ -73,42 +77,46 @@ namespace Desktop_Scrapping
             var item_pricce = txtMinimumPrice.Text;
             ScrapeData(Item_name, Sold_items);
         }
-        public void ScrapeData(string Search_Url = "slicer", string Search_sold = "500")
+
+        [Obsolete]
+        public void ScrapeData(string CategoryName="Men's Fashion",string Search_Url = "slicer", string Search_sold = "500")
         {
             try
             {
                 //Declaration of Variables
 
                 var Message = "";
-                var totalPages = "";
                 ItemsName items = new ItemsName();
                 SellerNameScrape sellerNameScrape = new SellerNameScrape();
                 List<string> NameProducts = new List<string>();
                 List<string> sellerName = new List<string>();
                 List<string> prodListFromEbay = new List<string>();
+                List<string> NewProducts = new List<string>();
                 IList<IWebElement> namesList;
-                IList<IWebElement> ItemSList;
                 IList<IWebElement> location;
-                IList<IWebElement> SellerList;
                 IList<IWebElement> soldList;
 
                 //Open CHromium and Get First Values
 
                 driver = new ChromeDriver(@"c:/");
                 driver.Url = Search_Url;
-                driver.Manage().Window.Minimize();
+                driver.Manage().Window.Maximize();
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
                 //Initialize IWEBELEMENTS variables
 
                 //driver.FindElement(By.Id("search-key")).SendKeys(Search_Value + OpenQA.Selenium.Keys.Enter);
                 //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
+
                 namesList = driver.FindElements(By.ClassName("item-title"));
                 soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
+                
                 //*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul/div[2]/li[1]/div/div[2]/div/div[7]/div/span/a
                 //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
+
                 var numb = 1;
                 var listNumber = 1;
+
                 //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
 
                 if (soldList.Count != 0)
@@ -126,11 +134,10 @@ namespace Desktop_Scrapping
                         soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
 
                     }
-                    //totalPages = driver.FindElement(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[3]/div/div[2]/span[1]")).Text;
-                    //var pages = totalPages.ToString();
-
-                    
+                    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    ExpectedConditions.InvisibilityOfElementLocated(By.ClassName("total-page"));
                     string page_count = driver.FindElement(By.ClassName("total-page")).Text;
+
                     //Find page number from List
                     string c = string.Empty;
                     var totalPageNumber = 1.00;
@@ -144,90 +151,138 @@ namespace Desktop_Scrapping
                     if (c.Length > 0)
                         totalPageNumber = Int32.Parse(c);
 
-                    ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,1080)");
 
                     //Check first Condition if user add sold item value and get all items list from Ali Express
-                    
-                    //for(int ipage_iterator = 1; ipage_iterator <= 1; ipage_iterator++)
-                    //{
 
-                    for (int s = 0; s < soldList.Count; s++)
+                    for (int ipage_iterator = 1; ipage_iterator <= totalPageNumber; ipage_iterator++)
                     {
-                        var curr = ((IJavaScriptExecutor)driver).ExecuteScript("return window.pageYOffset;").ToString();
-                        var curr1 = Int32.Parse(curr);
-                        ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 400) + ")");
-                        //Console.WriteLine(namesList[i].Text);
-                        //soldList = driver.FindElements(By.XPath("sale-value-link"));
-                        var soldValue = soldList[s].Text;
-                        var soldValue1 = soldValue.ToString();
 
-                        //Find Number from string
-
-                        string b = string.Empty;
-                        var intValueSold = 1.00;
-
-                        for (int i = 0; i < soldValue1.Length; i++)
+                        for (int s = 0; s < soldList.Count; s++)
                         {
-                            if (Char.IsDigit(soldValue1[i]))
-                                b += soldValue1[i];
+                            if(ipage_iterator > 1)
+                            {
+                                for(var page_loader=0; page_loader<namesList.Count; page_loader++)
+                                {
+                                    var curr = ((IJavaScriptExecutor)driver).ExecuteScript("return window.pageYOffset;").ToString();
+                                    var curr1 = Int32.Parse(curr);
+                                    ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 700) + ")");
+                                    namesList = driver.FindElements(By.ClassName("item-title"));
+                                    soldList = driver.FindElements(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div/li/div/div/div/div/div/span/a"));
+
+                                }
+                            }
+                            
+                            ////Console.WriteLine(namesList[i].Text);
+                            //soldList = driver.FindElements(By.XPath("sale-value-link"));
+                            var soldValue = soldList[s].Text;
+                            var soldValue1 = soldValue.ToString();
+
+                            //Find Number from string
+
+                            string b = string.Empty;
+                            var intValueSold = 1.00;
+
+                            for (int i = 0; i < soldValue1.Length; i++)
+                            {
+                                if (Char.IsDigit(soldValue1[i]))
+                                    b += soldValue1[i];
+                            }
+
+                            if (b.Length > 0)
+                                intValueSold = Int32.Parse(b);
+
+                            var ValueFromInput = Int32.Parse(Search_sold);
+
+                            //ValueFromInput given by User
+
+                            if (intValueSold >= ValueFromInput)
+                            {
+                                IWebElement ValueName = driver.FindElement(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div[" + numb + "]/li[" + listNumber + "]/div/div[2]/div/div[1]/a"));
+                                string urlOFItem = driver.FindElement(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div[" + numb + "]/li[" + listNumber + "]/div/div[2]/div/div[1]/a")).GetAttribute("href");
+
+                                var ITemsNameFromALiEx = ValueName.Text.ToString();
+                                List<Brand_Table> listBrand=model.Brand_Table.ToList();
+                                
+                                if(listBrand.Count != 0)
+                                {
+                                    var h = true;
+                                    foreach (var it in listBrand)
+                                    {
+                                        string BrandWord = it.Brand_Name;
+                                        h = ITemsNameFromALiEx.Contains(BrandWord);
+                                        if(h==true)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (h==false)
+                                    {
+                                        var n = s;
+                                        listNumber = (n % 4) + 1;
+                                        numb = (n / 4) + 1;
+
+                                        //Get specific element name given by user
+
+                                        numb = (s / 4) + 1;
+
+                                        var listLength = namesList.Count;
+                                        //namesList.Append(ValueName);
+
+                                        //Save names in List Items of string 
+                                        NewProducts.Add(ValueName.Text.ToString());
+                                        items.ItemsName1 = ValueName.Text;
+                                        items.ItemUrl = urlOFItem.ToString();
+                                        items.ScrapID = Convert.ToInt32(RecentID());
+                                        items.CategoryName = CategoryName;
+                                        //Save all Item names in DataBase
+
+                                        model.ItemsNames.Add(items);
+                                        model.SaveChanges();
+                                            
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+                                    
+                                }
+                                else
+                                {
+                                    var n = s;
+                                    listNumber = (n % 4) + 1;
+                                    numb = (n / 4) + 1;
+
+                                    //Get specific element name given by user
+
+                                     numb = (s / 4) + 1;
+
+                                    var listLength = namesList.Count;
+                                    //namesList.Append(ValueName);
+
+                                    //Save names in List Items of string 
+                                    NewProducts.Add(ValueName.Text.ToString());
+                                    items.ItemsName1 = ValueName.Text;
+                                    items.ItemUrl = urlOFItem.ToString();
+                                    items.ScrapID = RecentID();
+                                    items.CategoryName = CategoryName;
+                                    //Save all Item names in DataBase
+
+                                    model.ItemsNames.Add(items);
+                                    model.SaveChanges();
+                                    //listNumber++;
+                                }
+                               
+                                
+
+                            }
                         }
+                        NameProducts.AddRange(NewProducts);
 
-                        if (b.Length > 0)
-                            intValueSold = Int32.Parse(b);
+                        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                        ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[3]/div/div[1]/div/button[2]"));
+                        driver.FindElement(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[3]/div/div[1]/div/button[2]")).SendKeys(OpenQA.Selenium.Keys.Enter);
 
-                        var ValueFromInput = Int32.Parse(Search_sold);
-
-                        //ValueFromInput given by User
-
-                        if (intValueSold >= ValueFromInput)
-                        {
-                            //if (listNumber > 4)
-                            //{
-                            //    numb++;
-                            //    listNumber = 1;
-
-                            //}
-                            var n = s;
-                            listNumber = (n % 4) + 1;
-                            numb = (n / 4) + 1;
-
-                            //Get specific element name given by user
-
-                            IWebElement ValueName = driver.FindElement(By.XPath("//*[@id='root']/div/div/div[2]/div[2]/div/div[2]/ul/div[" + numb + "]/li[" + listNumber + "]/div/div[2]/div/div[1]/a"));
-                            //IWebElement urlOFItem = driver.FindElement(By.XPath(""));
-                            numb = (s / 4) + 1;
-
-                            var listLength = namesList.Count;
-                            //namesList.Append(ValueName);
-
-                            //Save names in List Items of string 
-
-                            NameProducts.Add(ValueName.Text);
-                            items.ItemsName1 = ValueName.Text;
-
-                            //Save all Item names in DataBase
-
-                            model.ItemsNames.Add(items);
-                            model.SaveChanges();
-                            //listNumber++;
-
-                        }
                     }
-                        //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-                        //ExpectedConditions.InvisibilityOfElementLocated(By.ClassName("next-btn"));
-
-                        //driver.FindElement(By.ClassName("next-btn")).SendKeys(OpenQA.Selenium.Keys.Enter);
-
-                    //}
-
-
-
-                    //*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul/div[1]/li[1]/div/div[2]/div/div[1]/a
-                    //*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul/div[1]/li[2]/div/div[2]/div/div[1]/a
-                    //*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul/div[2]/li[1]/div/div[2]/div/div[1]/a
-                    //*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul/div[3]/li[1]/div/div[2]/div/div[1]/a
-                    //*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul/div[15]/li[1]/div/div[2]/div/div[1]/a
-
 
                     //Check values of all getting values
 
@@ -271,7 +326,6 @@ namespace Desktop_Scrapping
                                 var curr = ((IJavaScriptExecutor)driver).ExecuteScript("return window.pageYOffset;").ToString();
                                 var curr1 = Int32.Parse(curr);
                                 ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(" + curr1 + "," + (curr1 + 900) + ")");
-                                Console.WriteLine(location[j].Text);
                                 location = driver.FindElements(By.ClassName("s-item__location"));
 
                             }
@@ -293,12 +347,15 @@ namespace Desktop_Scrapping
                                 {
                                     try
                                     {
+                                        var productUrl = driver.FindElement(By.XPath("//*[@id='srp-river-results']/ul/li[" + num + "]/div/div[2]/a")).GetAttribute("href");
                                         driver.FindElement(By.XPath("//*[@id='srp-river-results']/ul/li[" + num + "]/div/div[2]/a")).Click();
                                         var productName = driver.FindElement(By.Id("itemTitle")).Text;
                                         productName = productName.ToString();
 
                                         prodListFromEbay.Add(productName);
                                         ProductsFromEbay.ProductsName = productName;
+                                        ProductsFromEbay.ProductURL = productUrl.ToString();
+                                        ProductsFromEbay.ScrapID = RecentID();
 
                                         model.ProductsFromEbays.Add(ProductsFromEbay);
                                         model.SaveChanges();
@@ -317,8 +374,11 @@ namespace Desktop_Scrapping
                                         if (locationOfSellers != "China")
                                         {
                                             IWebElement SellerName1 = driver.FindElement(By.ClassName("mbg-id"));
+                                            string sellerUrl= driver.FindElement(By.ClassName("mbg-id")).GetAttribute("href");
                                             sellerName.Add(SellerName1.Text);
                                             sellerNameScrape.SellerName = SellerName1.Text;
+                                            sellerNameScrape.SellerUrl = sellerUrl.ToString();
+                                            sellerNameScrape.ScrapID = RecentID();
 
                                             //Add Seler name in DataBase
 
@@ -411,17 +471,26 @@ namespace Desktop_Scrapping
         {
             try
             {
-                var B_ID = Convert.ToInt32(txtBrandID.Text);
-                var B_Name = txtBrandName.Text;
+                if(txtBrandName.Text != "")
+                {
+                    var B_Name = txtBrandName.Text;
 
-                Brand_Table Btable = new Brand_Table();
-                Btable.ID_Brand = B_ID;
-                Btable.Brand_Name = B_Name;
+                    Brand_Table Btable = new Brand_Table();
+                    Btable.Brand_Name = B_Name;
 
-                model.Brand_Table.Add(Btable);
-                model.SaveChanges();
+                    model.Brand_Table.Add(Btable);
+                    model.SaveChanges();
 
-                MessageBox.Show("Brands Saved Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Brands Saved Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.brand_TableTableAdapter.Fill(this.scrapeTestDataSetBrandTable.Brand_Table);
+                }
+                else
+                {
+                    MessageBox.Show("Please!!! fill Reqired Fields!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -458,13 +527,16 @@ namespace Desktop_Scrapping
         {
             try
             {
-                var B_ID = Convert.ToInt32(txtBrandID.Text);
+                var b_ID = Convert.ToInt32(txtBrandID.Text);
 
-                Brand_Table brand_Table = model.Brand_Table.Where(a => a.ID_Brand == B_ID).FirstOrDefault();
+                Brand_Table brand_Table = model.Brand_Table.Where(a => a.Brand_ID == b_ID).FirstOrDefault();
                 model.Brand_Table.Remove(brand_Table);
                 model.SaveChanges();
 
                 MessageBox.Show("Deleted Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.brand_TableTableAdapter.Fill(this.scrapeTestDataSetBrandTable.Brand_Table);
+
             }
             catch (Exception ex)
             {
@@ -514,20 +586,26 @@ namespace Desktop_Scrapping
         {
             try
             {
-                var B_ID = Convert.ToInt32(txtBrandID.Text);
+                var b_ID = Convert.ToInt32(txtBrandID.Text);
 
-                Brand_Table brand_Table = model.Brand_Table.Where(a => a.ID_Brand == B_ID).FirstOrDefault();
+
+                Brand_Table brand_Table = model.Brand_Table.Where(a => a.Brand_ID == b_ID).FirstOrDefault();
 
                 if (brand_Table != null)
                 {
                     var B_Name = txtBrandName.Text;
 
-                    Brand_Table Btable = new Brand_Table();
-                    Btable.ID_Brand = B_ID;
-                    Btable.Brand_Name = B_Name;
+                    //Brand_Table Btable = new Brand_Table();
+                    //Btable.Brand_ID = b_ID;
+                    brand_Table.Brand_Name = B_Name;
 
-                    model.Entry(Btable).State = EntityState.Modified;
+                    model.Entry(brand_Table).State = EntityState.Modified;
                     model.SaveChanges();
+
+                    MessageBox.Show("Edit Successfully!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                    this.brand_TableTableAdapter.Fill(this.scrapeTestDataSetBrandTable.Brand_Table);
                 }
                 else
                 {
@@ -540,49 +618,71 @@ namespace Desktop_Scrapping
             }
         }
 
+        [Obsolete]
         private void ScrappingStart_Click(object sender, EventArgs e)
         {
-            if(checkboxListCat.SelectedItems!=null)
+            if(checkboxListCat.SelectedItems.Count != 0)
             {
-                ScrapDataTime scrapDataTime = new ScrapDataTime();
-
-                var time = DateTime.Now;
-                string timed =time.ToString();
-                scrapDataTime.TimeDates = timed;
-
-                model.ScrapDataTimes.Add(scrapDataTime);
-                model.SaveChanges();
-
-                string soldPrice = txtSoldValueInput.Text;
-                //string name = checkboxListCat.Text;
-                string minPrice = txtProductMinPrice.Text;
-                string maxPrice = txtProductMaxPrice.Text;
-
-                txtSoldValueInput.ReadOnly = true;
-                txtProductMinPrice.ReadOnly = true;
-                txtProductMaxPrice.ReadOnly = true;
-
-                var itemCounr = checkboxListCat.Items.Count;
-                for (int i = 0; i < checkboxListCat.Items.Count; i++)
+                if(txtSoldValueInput.Text != ""&& txtProductMinPrice.Text!=""&& txtProductMaxPrice.Text!="")
                 {
-                    if(checkboxListCat.GetItemChecked(i) == true)
+                    var maxVal = Convert.ToInt32(txtProductMaxPrice.Text);
+                    var minVal = Convert.ToInt32(txtProductMinPrice.Text);
+                    if (minVal <= maxVal)
                     {
-                        
-                        string str = (string)checkboxListCat.Items[i];
-                        Category_Table category_Table= model.Category_Table.Where(a => a.Category_Name == str).FirstOrDefault();
-                        string url=category_Table.UrlCategory;
-                        url = url.ToString();
-                        ScrapeData(url, soldPrice);
+                        TimerProgressBar.Enabled = true;
+                        MessageBox.Show("Timer is on ");
+                        ScrapDataTime scrapDataTime = new ScrapDataTime();
+
+                        var time = DateTime.Now;
+                        string timed = time.ToString();
+                        scrapDataTime.TimeDates = timed;
+
+                        model.ScrapDataTimes.Add(scrapDataTime);
+                        model.SaveChanges();
+
+                        string soldPrice = txtSoldValueInput.Text;
+                        //string name = checkboxListCat.Text;
+                        string minPrice = txtProductMinPrice.Text;
+                        string maxPrice = txtProductMaxPrice.Text;
+
+                        txtSoldValueInput.ReadOnly = true;
+                        txtProductMinPrice.ReadOnly = true;
+                        txtProductMaxPrice.ReadOnly = true;
+
+                        var itemCounr = checkboxListCat.Items.Count;
+                        for (int i = 0; i < checkboxListCat.Items.Count; i++)
+                        {
+                            if (checkboxListCat.GetItemChecked(i) == true)
+                            {
+
+                                string str = (string)checkboxListCat.Items[i];
+                                Category_Table category_Table = model.Category_Table.Where(a => a.Category_Name == str).FirstOrDefault();
+                                string url = category_Table.UrlCategory;
+                                url = url.ToString();
+                                ScrapeData(str, url, soldPrice);
+
+                            }
+                        }
+                        //foreach (ListItem item in checkboxListCat.SelectedItems)
+                        //{
+                        //    ScrapeData(item.ToString(), soldPrice);
+                        //}
+
+
+                        //ScrapeData("Women's Fashion", soldPrice);
+                        TimerProgressBar.Enabled = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Minimum Price is Greator than Maximum!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
                 }
-                //foreach (ListItem item in checkboxListCat.SelectedItems)
-                //{
-                //    ScrapeData(item.ToString(), soldPrice);
-                //}
-
-
-                //ScrapeData("Women's Fashion", soldPrice);
+                else
+                {
+                    MessageBox.Show("Enter All Required Values", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
             }
             else
             {
@@ -625,6 +725,111 @@ namespace Desktop_Scrapping
                         MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+            }
+        }
+
+        public static int RecentID()
+        {
+            string query = "select max(ScrapID)+1 from [ScrapeTest].[dbo].[ScrapDataTime]";
+
+            SqlConnection objConnection1 = new SqlConnection(constr);
+            objConnection1.Open();
+            SqlCommand cmd = new SqlCommand(query, objConnection1);
+            int rowsAffected = Convert.ToInt32(cmd.ExecuteScalar());
+            objConnection1.Close();
+            return rowsAffected;
+
+        }
+
+
+        private void dataGridViewBrand_CellMouseClick_1(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridViewBrand.Rows[e.RowIndex];
+                txtBrandName.Text = row.Cells[0].Value.ToString();
+                txtBrandID.Text = row.Cells[1].Value.ToString();
+            }
+        }
+
+        private void btnPdtExportAliExpReport_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx" })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (XLWorkbook workbook = new XLWorkbook())
+                        {
+                            //workbook.Worksheets.Add(this.model.SellerNameScrapes.CopytoDataTable(), "SellerList");
+                            workbook.Worksheets.Add(this.scrapeTestDataSet1.ItemsNames.CopyToDataTable(), "SellerList");
+                            workbook.SaveAs(sfd.FileName);
+                        }
+                        MessageBox.Show("Successfully Created Excel File", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void btnPdtEbay_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx" })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (XLWorkbook workbook = new XLWorkbook())
+                        {
+                            //workbook.Worksheets.Add(this.model.SellerNameScrapes.CopytoDataTable(), "SellerList");
+                            workbook.Worksheets.Add(this.scrapeTestDataSet2.ProductsFromEbay.CopyToDataTable(), "SellerList");
+                            workbook.SaveAs(sfd.FileName);
+                        }
+                        MessageBox.Show("Successfully Created Excel File", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void btnExportSellerReport_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx" })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (XLWorkbook workbook = new XLWorkbook())
+                        {
+                            //workbook.Worksheets.Add(this.model.SellerNameScrapes.CopytoDataTable(), "SellerList");
+                            workbook.Worksheets.Add(this.scrapeTestDataSet3.SellerNameScrape.CopyToDataTable(), "SellerList");
+                            workbook.SaveAs(sfd.FileName);
+                        }
+                        MessageBox.Show("Successfully Created Excel File", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void TimerProgressBar_Tick(object sender, EventArgs e)
+        {
+            progressBar.Increment(1);
+            if(progressBar.Value==100)
+            {
+                progressBar.Value = 0;
             }
         }
     }

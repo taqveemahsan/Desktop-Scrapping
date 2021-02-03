@@ -11,7 +11,6 @@
           </Key>
           <Property Name="Brand_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Brand_Name" Type="varchar(max)" Nullable="false" />
-          <Property Name="ID_Brand" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Category_Table">
           <Key>
@@ -30,6 +29,7 @@
           <Property Name="ItemsName" Type="varchar(max)" />
           <Property Name="ScrapID" Type="int" />
           <Property Name="ItemUrl" Type="varchar(max)" />
+          <Property Name="CategoryName" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ProductsFromEbay">
           <Key>
@@ -37,6 +37,8 @@
           </Key>
           <Property Name="ProductsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductsName" Type="varchar(max)" />
+          <Property Name="ScrapID" Type="int" />
+          <Property Name="ProductURL" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ScrapDataTime">
           <Key>
@@ -74,30 +76,6 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_ItemsNames_ScrapDataTime">
-          <End Role="ScrapDataTime" Type="Self.ScrapDataTime" Multiplicity="0..1" />
-          <End Role="ItemsNames" Type="Self.ItemsNames" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ScrapDataTime">
-              <PropertyRef Name="ScrapID" />
-            </Principal>
-            <Dependent Role="ItemsNames">
-              <PropertyRef Name="ScrapID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SellerNameScrape_ScrapDataTime">
-          <End Role="ScrapDataTime" Type="Self.ScrapDataTime" Multiplicity="0..1" />
-          <End Role="SellerNameScrape" Type="Self.SellerNameScrape" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ScrapDataTime">
-              <PropertyRef Name="ScrapID" />
-            </Principal>
-            <Dependent Role="SellerNameScrape">
-              <PropertyRef Name="ScrapID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ScrapeTestModelStoreContainer">
           <EntitySet Name="Brand_Table" EntityType="Self.Brand_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category_Table" EntityType="Self.Category_Table" Schema="dbo" store:Type="Tables" />
@@ -107,14 +85,6 @@
           <EntitySet Name="ScrapEbay" EntityType="Self.ScrapEbay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SellerNameScrape" EntityType="Self.SellerNameScrape" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ItemsNames_ScrapDataTime" Association="Self.FK_ItemsNames_ScrapDataTime">
-            <End Role="ScrapDataTime" EntitySet="ScrapDataTime" />
-            <End Role="ItemsNames" EntitySet="ItemsNames" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SellerNameScrape_ScrapDataTime" Association="Self.FK_SellerNameScrape_ScrapDataTime">
-            <End Role="ScrapDataTime" EntitySet="ScrapDataTime" />
-            <End Role="SellerNameScrape" EntitySet="SellerNameScrape" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -129,14 +99,6 @@
           <EntitySet Name="ScrapEbays" EntityType="ScrapeTestModel.ScrapEbay" />
           <EntitySet Name="SellerNameScrapes" EntityType="ScrapeTestModel.SellerNameScrape" />
           <EntitySet Name="sysdiagrams" EntityType="ScrapeTestModel.sysdiagram" />
-          <AssociationSet Name="FK_ItemsNames_ScrapDataTime" Association="ScrapeTestModel.FK_ItemsNames_ScrapDataTime">
-            <End Role="ScrapDataTime" EntitySet="ScrapDataTimes" />
-            <End Role="ItemsName" EntitySet="ItemsNames" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SellerNameScrape_ScrapDataTime" Association="ScrapeTestModel.FK_SellerNameScrape_ScrapDataTime">
-            <End Role="ScrapDataTime" EntitySet="ScrapDataTimes" />
-            <End Role="SellerNameScrape" EntitySet="SellerNameScrapes" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Brand_Table">
           <Key>
@@ -144,7 +106,6 @@
           </Key>
           <Property Name="Brand_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Brand_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ID_Brand" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Category_Table">
           <Key>
@@ -163,7 +124,7 @@
           <Property Name="ItemsName1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ScrapID" Type="Int32" />
           <Property Name="ItemUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ScrapDataTime" Relationship="ScrapeTestModel.FK_ItemsNames_ScrapDataTime" FromRole="ItemsName" ToRole="ScrapDataTime" />
+          <Property Name="CategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ProductsFromEbay">
           <Key>
@@ -171,6 +132,8 @@
           </Key>
           <Property Name="ProductsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductsName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ScrapID" Type="Int32" />
+          <Property Name="ProductURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ScrapDataTime">
           <Key>
@@ -178,8 +141,6 @@
           </Key>
           <Property Name="ScrapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TimeDates" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ItemsNames" Relationship="ScrapeTestModel.FK_ItemsNames_ScrapDataTime" FromRole="ScrapDataTime" ToRole="ItemsName" />
-          <NavigationProperty Name="SellerNameScrapes" Relationship="ScrapeTestModel.FK_SellerNameScrape_ScrapDataTime" FromRole="ScrapDataTime" ToRole="SellerNameScrape" />
         </EntityType>
         <EntityType Name="ScrapEbay">
           <Key>
@@ -199,7 +160,6 @@
           <Property Name="SellerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ScrapID" Type="Int32" />
           <Property Name="SellerUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ScrapDataTime" Relationship="ScrapeTestModel.FK_SellerNameScrape_ScrapDataTime" FromRole="SellerNameScrape" ToRole="ScrapDataTime" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -211,30 +171,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_ItemsNames_ScrapDataTime">
-          <End Type="ScrapeTestModel.ScrapDataTime" Role="ScrapDataTime" Multiplicity="0..1" />
-          <End Type="ScrapeTestModel.ItemsName" Role="ItemsName" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ScrapDataTime">
-              <PropertyRef Name="ScrapID" />
-            </Principal>
-            <Dependent Role="ItemsName">
-              <PropertyRef Name="ScrapID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SellerNameScrape_ScrapDataTime">
-          <End Type="ScrapeTestModel.ScrapDataTime" Role="ScrapDataTime" Multiplicity="0..1" />
-          <End Type="ScrapeTestModel.SellerNameScrape" Role="SellerNameScrape" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ScrapDataTime">
-              <PropertyRef Name="ScrapID" />
-            </Principal>
-            <Dependent Role="SellerNameScrape">
-              <PropertyRef Name="ScrapID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -244,7 +180,6 @@
           <EntitySetMapping Name="Brand_Table">
             <EntityTypeMapping TypeName="ScrapeTestModel.Brand_Table">
               <MappingFragment StoreEntitySet="Brand_Table">
-                <ScalarProperty Name="ID_Brand" ColumnName="ID_Brand" />
                 <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
                 <ScalarProperty Name="Brand_ID" ColumnName="Brand_ID" />
               </MappingFragment>
@@ -263,6 +198,7 @@
           <EntitySetMapping Name="ItemsNames">
             <EntityTypeMapping TypeName="ScrapeTestModel.ItemsName">
               <MappingFragment StoreEntitySet="ItemsNames">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="ItemUrl" ColumnName="ItemUrl" />
                 <ScalarProperty Name="ScrapID" ColumnName="ScrapID" />
                 <ScalarProperty Name="ItemsName1" ColumnName="ItemsName" />
@@ -273,6 +209,8 @@
           <EntitySetMapping Name="ProductsFromEbays">
             <EntityTypeMapping TypeName="ScrapeTestModel.ProductsFromEbay">
               <MappingFragment StoreEntitySet="ProductsFromEbay">
+                <ScalarProperty Name="ProductURL" ColumnName="ProductURL" />
+                <ScalarProperty Name="ScrapID" ColumnName="ScrapID" />
                 <ScalarProperty Name="ProductsName" ColumnName="ProductsName" />
                 <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
               </MappingFragment>

@@ -14,19 +14,7 @@ namespace Desktop_Scrapping.Model
     
     public partial class ScrapDataTime
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ScrapDataTime()
-        {
-            this.ItemsNames = new HashSet<ItemsName>();
-            this.SellerNameScrapes = new HashSet<SellerNameScrape>();
-        }
-    
         public int ScrapID { get; set; }
         public string TimeDates { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ItemsName> ItemsNames { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SellerNameScrape> SellerNameScrapes { get; set; }
     }
 }

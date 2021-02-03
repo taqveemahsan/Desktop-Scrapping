@@ -39,8 +39,6 @@ namespace Desktop_Scrapping
             this.tabScrapCat = new System.Windows.Forms.TabPage();
             this.lblSearchInfo = new System.Windows.Forms.Label();
             this.GroupBoxScrappingLogs = new System.Windows.Forms.GroupBox();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.lblItemName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnScrapStop = new System.Windows.Forms.Button();
             this.btnScrappingStart = new System.Windows.Forms.Button();
@@ -84,12 +82,8 @@ namespace Desktop_Scrapping
             this.btnBrandDel = new System.Windows.Forms.Button();
             this.btnBrandEdit = new System.Windows.Forms.Button();
             this.lblBrandName = new System.Windows.Forms.Label();
-            this.lblBrandID = new System.Windows.Forms.Label();
             this.txtBrandName = new System.Windows.Forms.TextBox();
-            this.txtBrandID = new System.Windows.Forms.TextBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.brandIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.brandNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewBrand = new System.Windows.Forms.DataGridView();
             this.brandTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.scrapeTestDataSetBrandTable = new Desktop_Scrapping.ScrapeTestDataSetBrandTable();
             this.panel13 = new System.Windows.Forms.Panel();
@@ -120,12 +114,50 @@ namespace Desktop_Scrapping
             this.category_TableTableAdapter = new Desktop_Scrapping.ScrapeTestDataSetCategoriesTableAdapters.Category_TableTableAdapter();
             this.brand_TableTableAdapter = new Desktop_Scrapping.ScrapeTestDataSetBrandTableTableAdapters.Brand_TableTableAdapter();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtScrapID = new System.Windows.Forms.TextBox();
+            this.brandNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Brand_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtBrandID = new System.Windows.Forms.TextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel21 = new System.Windows.Forms.Panel();
+            this.tabReports = new System.Windows.Forms.TabControl();
+            this.tabPdtAliExp = new System.Windows.Forms.TabPage();
+            this.tabPdtFromEbay = new System.Windows.Forms.TabPage();
+            this.tabsellerNames = new System.Windows.Forms.TabPage();
+            this.dataGridViewSellerNameReport = new System.Windows.Forms.DataGridView();
+            this.btnExportSellerReport = new System.Windows.Forms.Button();
+            this.btnPdtEbay = new System.Windows.Forms.Button();
+            this.dataGridViewPdtFromEbay = new System.Windows.Forms.DataGridView();
+            this.btnPdtExportAliExpReport = new System.Windows.Forms.Button();
+            this.dataGridViewPdtAliExp = new System.Windows.Forms.DataGridView();
+            this.scrapeTestDataSet1 = new Desktop_Scrapping.ScrapeTestDataSet1();
+            this.itemsNamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.itemsNamesTableAdapter = new Desktop_Scrapping.ScrapeTestDataSet1TableAdapters.ItemsNamesTableAdapter();
+            this.itemsNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemUrlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.scrapeTestDataSet2 = new Desktop_Scrapping.ScrapeTestDataSet2();
+            this.productsFromEbayBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.productsFromEbayTableAdapter = new Desktop_Scrapping.ScrapeTestDataSet2TableAdapters.ProductsFromEbayTableAdapter();
+            this.productsNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productURLDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.scrapeTestDataSet3 = new Desktop_Scrapping.ScrapeTestDataSet3();
+            this.sellerNameScrapeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.sellerNameScrapeTableAdapter1 = new Desktop_Scrapping.ScrapeTestDataSet3TableAdapters.SellerNameScrapeTableAdapter();
+            this.sellerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SellerUrl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paneProgressBar = new System.Windows.Forms.Panel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.TimerProgressBar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellerNameScrapeBindingSource)).BeginInit();
             this.panel3.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabScrapCat.SuspendLayout();
-            this.panel15.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -139,7 +171,7 @@ namespace Desktop_Scrapping
             this.panel17.SuspendLayout();
             this.tabBrands.SuspendLayout();
             this.Brands.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBrand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.brandTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSetBrandTable)).BeginInit();
             this.panel7.SuspendLayout();
@@ -153,6 +185,23 @@ namespace Desktop_Scrapping
             ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSetCategories)).BeginInit();
             this.tabHome.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.panel15.SuspendLayout();
+            this.panel20.SuspendLayout();
+            this.tabReports.SuspendLayout();
+            this.tabPdtAliExp.SuspendLayout();
+            this.tabPdtFromEbay.SuspendLayout();
+            this.tabsellerNames.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSellerNameReport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPdtFromEbay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPdtAliExp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsNamesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productsFromEbayBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSet3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sellerNameScrapeBindingSource1)).BeginInit();
+            this.paneProgressBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // scrapeTestDataSet
@@ -172,10 +221,10 @@ namespace Desktop_Scrapping
             // panel3
             // 
             this.panel3.Controls.Add(this.tabControl);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(805, 532);
+            this.panel3.Size = new System.Drawing.Size(805, 495);
             this.panel3.TabIndex = 13;
             // 
             // tabControl
@@ -188,25 +237,27 @@ namespace Desktop_Scrapping
             this.tabControl.Controls.Add(this.tabBrands);
             this.tabControl.Controls.Add(this.tabCategories);
             this.tabControl.Controls.Add(this.tabHome);
+            this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl.Location = new System.Drawing.Point(0, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(805, 529);
+            this.tabControl.Size = new System.Drawing.Size(805, 492);
             this.tabControl.TabIndex = 14;
             // 
             // tabScrapCat
             // 
             this.tabScrapCat.BackColor = System.Drawing.Color.White;
+            this.tabScrapCat.Controls.Add(this.txtScrapID);
             this.tabScrapCat.Controls.Add(this.lblSearchInfo);
+            this.tabScrapCat.Controls.Add(this.label2);
             this.tabScrapCat.Controls.Add(this.GroupBoxScrappingLogs);
-            this.tabScrapCat.Controls.Add(this.panel15);
             this.tabScrapCat.Controls.Add(this.groupBox1);
             this.tabScrapCat.Controls.Add(this.panel14);
             this.tabScrapCat.Controls.Add(this.panel10);
             this.tabScrapCat.Location = new System.Drawing.Point(4, 22);
             this.tabScrapCat.Name = "tabScrapCat";
-            this.tabScrapCat.Size = new System.Drawing.Size(797, 503);
+            this.tabScrapCat.Size = new System.Drawing.Size(797, 466);
             this.tabScrapCat.TabIndex = 3;
             this.tabScrapCat.Text = "Scrap Through Category";
             // 
@@ -231,25 +282,6 @@ namespace Desktop_Scrapping
             this.GroupBoxScrappingLogs.TabStop = false;
             this.GroupBoxScrappingLogs.Text = "Scrapping Logs";
             // 
-            // panel15
-            // 
-            this.panel15.Controls.Add(this.lblItemName);
-            this.panel15.Location = new System.Drawing.Point(215, 329);
-            this.panel15.Margin = new System.Windows.Forms.Padding(2);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(328, 146);
-            this.panel15.TabIndex = 29;
-            // 
-            // lblItemName
-            // 
-            this.lblItemName.AutoSize = true;
-            this.lblItemName.Location = new System.Drawing.Point(9, 15);
-            this.lblItemName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblItemName.Name = "lblItemName";
-            this.lblItemName.Size = new System.Drawing.Size(297, 13);
-            this.lblItemName.TabIndex = 1;
-            this.lblItemName.Text = "\"Multifunctional Vegetable Cutter Fruit Slicer Grater Shredders";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnScrapStop);
@@ -261,11 +293,11 @@ namespace Desktop_Scrapping
             this.groupBox1.Controls.Add(this.lblProductPrice);
             this.groupBox1.Controls.Add(this.txtSoldValueInput);
             this.groupBox1.Controls.Add(this.lblEnterSoldPro);
-            this.groupBox1.Location = new System.Drawing.Point(215, 116);
+            this.groupBox1.Location = new System.Drawing.Point(215, 154);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(328, 206);
+            this.groupBox1.Size = new System.Drawing.Size(328, 322);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search Criteria";
@@ -274,7 +306,7 @@ namespace Desktop_Scrapping
             // 
             this.btnScrapStop.BackColor = System.Drawing.Color.Crimson;
             this.btnScrapStop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnScrapStop.Location = new System.Drawing.Point(174, 158);
+            this.btnScrapStop.Location = new System.Drawing.Point(179, 216);
             this.btnScrapStop.Margin = new System.Windows.Forms.Padding(2);
             this.btnScrapStop.Name = "btnScrapStop";
             this.btnScrapStop.Size = new System.Drawing.Size(64, 29);
@@ -287,7 +319,7 @@ namespace Desktop_Scrapping
             // 
             this.btnScrappingStart.BackColor = System.Drawing.Color.SeaGreen;
             this.btnScrappingStart.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnScrappingStart.Location = new System.Drawing.Point(242, 158);
+            this.btnScrappingStart.Location = new System.Drawing.Point(247, 216);
             this.btnScrappingStart.Margin = new System.Windows.Forms.Padding(2);
             this.btnScrappingStart.Name = "btnScrappingStart";
             this.btnScrappingStart.Size = new System.Drawing.Size(64, 29);
@@ -298,16 +330,16 @@ namespace Desktop_Scrapping
             // 
             // txtProductMaxPrice
             // 
-            this.txtProductMaxPrice.Location = new System.Drawing.Point(44, 128);
+            this.txtProductMaxPrice.Location = new System.Drawing.Point(54, 144);
             this.txtProductMaxPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txtProductMaxPrice.Name = "txtProductMaxPrice";
-            this.txtProductMaxPrice.Size = new System.Drawing.Size(123, 20);
+            this.txtProductMaxPrice.Size = new System.Drawing.Size(100, 20);
             this.txtProductMaxPrice.TabIndex = 7;
             // 
             // lblMaxPrice
             // 
             this.lblMaxPrice.AutoSize = true;
-            this.lblMaxPrice.Location = new System.Drawing.Point(13, 131);
+            this.lblMaxPrice.Location = new System.Drawing.Point(23, 147);
             this.lblMaxPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMaxPrice.Name = "lblMaxPrice";
             this.lblMaxPrice.Size = new System.Drawing.Size(27, 13);
@@ -317,7 +349,7 @@ namespace Desktop_Scrapping
             // lblminPrice
             // 
             this.lblminPrice.AutoSize = true;
-            this.lblminPrice.Location = new System.Drawing.Point(13, 102);
+            this.lblminPrice.Location = new System.Drawing.Point(23, 113);
             this.lblminPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblminPrice.Name = "lblminPrice";
             this.lblminPrice.Size = new System.Drawing.Size(24, 13);
@@ -326,34 +358,34 @@ namespace Desktop_Scrapping
             // 
             // txtProductMinPrice
             // 
-            this.txtProductMinPrice.Location = new System.Drawing.Point(44, 100);
+            this.txtProductMinPrice.Location = new System.Drawing.Point(54, 111);
             this.txtProductMinPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txtProductMinPrice.Name = "txtProductMinPrice";
-            this.txtProductMinPrice.Size = new System.Drawing.Size(123, 20);
+            this.txtProductMinPrice.Size = new System.Drawing.Size(100, 20);
             this.txtProductMinPrice.TabIndex = 3;
             // 
             // lblProductPrice
             // 
             this.lblProductPrice.AutoSize = true;
-            this.lblProductPrice.Location = new System.Drawing.Point(13, 78);
+            this.lblProductPrice.Location = new System.Drawing.Point(23, 89);
             this.lblProductPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductPrice.Name = "lblProductPrice";
-            this.lblProductPrice.Size = new System.Drawing.Size(71, 13);
+            this.lblProductPrice.Size = new System.Drawing.Size(74, 13);
             this.lblProductPrice.TabIndex = 2;
-            this.lblProductPrice.Text = "Product Price";
+            this.lblProductPrice.Text = "Product Price:";
             // 
             // txtSoldValueInput
             // 
-            this.txtSoldValueInput.Location = new System.Drawing.Point(44, 48);
+            this.txtSoldValueInput.Location = new System.Drawing.Point(54, 59);
             this.txtSoldValueInput.Margin = new System.Windows.Forms.Padding(2);
             this.txtSoldValueInput.Name = "txtSoldValueInput";
-            this.txtSoldValueInput.Size = new System.Drawing.Size(123, 20);
+            this.txtSoldValueInput.Size = new System.Drawing.Size(100, 20);
             this.txtSoldValueInput.TabIndex = 1;
             // 
             // lblEnterSoldPro
             // 
             this.lblEnterSoldPro.AutoSize = true;
-            this.lblEnterSoldPro.Location = new System.Drawing.Point(13, 29);
+            this.lblEnterSoldPro.Location = new System.Drawing.Point(23, 40);
             this.lblEnterSoldPro.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEnterSoldPro.Name = "lblEnterSoldPro";
             this.lblEnterSoldPro.Size = new System.Drawing.Size(51, 13);
@@ -368,7 +400,7 @@ namespace Desktop_Scrapping
             this.panel14.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel14.Location = new System.Drawing.Point(0, 72);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(198, 431);
+            this.panel14.Size = new System.Drawing.Size(198, 394);
             this.panel14.TabIndex = 27;
             // 
             // checkboxListCat
@@ -643,7 +675,7 @@ namespace Desktop_Scrapping
             // 
             this.tabBrands.BackColor = System.Drawing.Color.White;
             this.tabBrands.Controls.Add(this.Brands);
-            this.tabBrands.Controls.Add(this.dataGridView2);
+            this.tabBrands.Controls.Add(this.dataGridViewBrand);
             this.tabBrands.Controls.Add(this.panel13);
             this.tabBrands.Controls.Add(this.panel7);
             this.tabBrands.Location = new System.Drawing.Point(4, 22);
@@ -655,14 +687,13 @@ namespace Desktop_Scrapping
             // 
             // Brands
             // 
+            this.Brands.Controls.Add(this.txtBrandID);
             this.Brands.Controls.Add(this.lblBrandsSomeDetail);
             this.Brands.Controls.Add(this.btnBrandSave);
             this.Brands.Controls.Add(this.btnBrandDel);
             this.Brands.Controls.Add(this.btnBrandEdit);
             this.Brands.Controls.Add(this.lblBrandName);
-            this.Brands.Controls.Add(this.lblBrandID);
             this.Brands.Controls.Add(this.txtBrandName);
-            this.Brands.Controls.Add(this.txtBrandID);
             this.Brands.Location = new System.Drawing.Point(207, 81);
             this.Brands.Name = "Brands";
             this.Brands.Size = new System.Drawing.Size(582, 153);
@@ -681,7 +712,7 @@ namespace Desktop_Scrapping
             // 
             this.btnBrandSave.BackColor = System.Drawing.Color.Crimson;
             this.btnBrandSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnBrandSave.Location = new System.Drawing.Point(96, 100);
+            this.btnBrandSave.Location = new System.Drawing.Point(99, 94);
             this.btnBrandSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnBrandSave.Name = "btnBrandSave";
             this.btnBrandSave.Size = new System.Drawing.Size(61, 29);
@@ -694,7 +725,7 @@ namespace Desktop_Scrapping
             // 
             this.btnBrandDel.BackColor = System.Drawing.Color.Crimson;
             this.btnBrandDel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnBrandDel.Location = new System.Drawing.Point(161, 100);
+            this.btnBrandDel.Location = new System.Drawing.Point(164, 94);
             this.btnBrandDel.Margin = new System.Windows.Forms.Padding(2);
             this.btnBrandDel.Name = "btnBrandDel";
             this.btnBrandDel.Size = new System.Drawing.Size(61, 29);
@@ -707,7 +738,7 @@ namespace Desktop_Scrapping
             // 
             this.btnBrandEdit.BackColor = System.Drawing.Color.SeaGreen;
             this.btnBrandEdit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnBrandEdit.Location = new System.Drawing.Point(226, 100);
+            this.btnBrandEdit.Location = new System.Drawing.Point(229, 94);
             this.btnBrandEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnBrandEdit.Name = "btnBrandEdit";
             this.btnBrandEdit.Size = new System.Drawing.Size(61, 29);
@@ -719,62 +750,41 @@ namespace Desktop_Scrapping
             // lblBrandName
             // 
             this.lblBrandName.AutoSize = true;
-            this.lblBrandName.Location = new System.Drawing.Point(9, 78);
+            this.lblBrandName.Location = new System.Drawing.Point(12, 64);
             this.lblBrandName.Name = "lblBrandName";
             this.lblBrandName.Size = new System.Drawing.Size(72, 13);
             this.lblBrandName.TabIndex = 3;
             this.lblBrandName.Text = "Brand Name: ";
             // 
-            // lblBrandID
-            // 
-            this.lblBrandID.AutoSize = true;
-            this.lblBrandID.Location = new System.Drawing.Point(9, 50);
-            this.lblBrandID.Name = "lblBrandID";
-            this.lblBrandID.Size = new System.Drawing.Size(55, 13);
-            this.lblBrandID.TabIndex = 2;
-            this.lblBrandID.Text = "Brand ID: ";
-            // 
             // txtBrandName
             // 
-            this.txtBrandName.Location = new System.Drawing.Point(101, 71);
+            this.txtBrandName.Location = new System.Drawing.Point(104, 57);
             this.txtBrandName.Name = "txtBrandName";
             this.txtBrandName.Size = new System.Drawing.Size(185, 20);
             this.txtBrandName.TabIndex = 1;
             // 
-            // txtBrandID
+            // dataGridViewBrand
             // 
-            this.txtBrandID.Location = new System.Drawing.Point(101, 43);
-            this.txtBrandID.Name = "txtBrandID";
-            this.txtBrandID.Size = new System.Drawing.Size(185, 20);
-            this.txtBrandID.TabIndex = 0;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.brandIDDataGridViewTextBoxColumn,
-            this.brandNameDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.brandTableBindingSource;
-            this.dataGridView2.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView2.Location = new System.Drawing.Point(206, 240);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(583, 254);
-            this.dataGridView2.TabIndex = 23;
-            // 
-            // brandIDDataGridViewTextBoxColumn
-            // 
-            this.brandIDDataGridViewTextBoxColumn.DataPropertyName = "Brand_ID";
-            this.brandIDDataGridViewTextBoxColumn.HeaderText = "Brand_ID";
-            this.brandIDDataGridViewTextBoxColumn.Name = "brandIDDataGridViewTextBoxColumn";
-            // 
-            // brandNameDataGridViewTextBoxColumn
-            // 
-            this.brandNameDataGridViewTextBoxColumn.DataPropertyName = "Brand_Name";
-            this.brandNameDataGridViewTextBoxColumn.HeaderText = "Brand_Name";
-            this.brandNameDataGridViewTextBoxColumn.Name = "brandNameDataGridViewTextBoxColumn";
+            this.dataGridViewBrand.AllowUserToAddRows = false;
+            this.dataGridViewBrand.AllowUserToDeleteRows = false;
+            this.dataGridViewBrand.AllowUserToOrderColumns = true;
+            this.dataGridViewBrand.AllowUserToResizeColumns = false;
+            this.dataGridViewBrand.AllowUserToResizeRows = false;
+            this.dataGridViewBrand.AutoGenerateColumns = false;
+            this.dataGridViewBrand.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewBrand.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewBrand.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.brandNameDataGridViewTextBoxColumn,
+            this.Brand_ID});
+            this.dataGridViewBrand.DataSource = this.brandTableBindingSource;
+            this.dataGridViewBrand.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewBrand.GridColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dataGridViewBrand.Location = new System.Drawing.Point(206, 240);
+            this.dataGridViewBrand.Name = "dataGridViewBrand";
+            this.dataGridViewBrand.RowHeadersVisible = false;
+            this.dataGridViewBrand.Size = new System.Drawing.Size(583, 254);
+            this.dataGridViewBrand.TabIndex = 23;
+            this.dataGridViewBrand.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewBrand_CellMouseClick_1);
             // 
             // brandTableBindingSource
             // 
@@ -1046,12 +1056,352 @@ namespace Desktop_Scrapping
             // 
             this.brand_TableTableAdapter.ClearBeforeFill = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(215, 116);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Scrap Number";
+            // 
+            // txtScrapID
+            // 
+            this.txtScrapID.Location = new System.Drawing.Point(296, 116);
+            this.txtScrapID.Name = "txtScrapID";
+            this.txtScrapID.Size = new System.Drawing.Size(57, 20);
+            this.txtScrapID.TabIndex = 11;
+            // 
+            // brandNameDataGridViewTextBoxColumn
+            // 
+            this.brandNameDataGridViewTextBoxColumn.DataPropertyName = "Brand_Name";
+            this.brandNameDataGridViewTextBoxColumn.HeaderText = "Brand_Name";
+            this.brandNameDataGridViewTextBoxColumn.Name = "brandNameDataGridViewTextBoxColumn";
+            // 
+            // Brand_ID
+            // 
+            this.Brand_ID.DataPropertyName = "Brand_ID";
+            this.Brand_ID.HeaderText = "Brand_ID";
+            this.Brand_ID.Name = "Brand_ID";
+            this.Brand_ID.Visible = false;
+            // 
+            // txtBrandID
+            // 
+            this.txtBrandID.Location = new System.Drawing.Point(361, 64);
+            this.txtBrandID.Name = "txtBrandID";
+            this.txtBrandID.Size = new System.Drawing.Size(82, 20);
+            this.txtBrandID.TabIndex = 13;
+            this.txtBrandID.Visible = false;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.tabReports);
+            this.tabPage1.Controls.Add(this.panel21);
+            this.tabPage1.Controls.Add(this.panel15);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(797, 503);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel15.Controls.Add(this.panel20);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel15.Location = new System.Drawing.Point(3, 3);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(791, 72);
+            this.panel15.TabIndex = 22;
+            // 
+            // panel20
+            // 
+            this.panel20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(57)))));
+            this.panel20.Controls.Add(this.label3);
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel20.Location = new System.Drawing.Point(0, 0);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(198, 72);
+            this.panel20.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("LibraryGothicExtraBold", 19F);
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label3.Location = new System.Drawing.Point(15, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(169, 34);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "SCRAP DATA";
+            // 
+            // panel21
+            // 
+            this.panel21.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel21.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel21.Location = new System.Drawing.Point(3, 75);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(198, 425);
+            this.panel21.TabIndex = 23;
+            // 
+            // tabReports
+            // 
+            this.tabReports.Controls.Add(this.tabPdtAliExp);
+            this.tabReports.Controls.Add(this.tabPdtFromEbay);
+            this.tabReports.Controls.Add(this.tabsellerNames);
+            this.tabReports.Location = new System.Drawing.Point(200, 75);
+            this.tabReports.Name = "tabReports";
+            this.tabReports.SelectedIndex = 0;
+            this.tabReports.Size = new System.Drawing.Size(597, 428);
+            this.tabReports.TabIndex = 24;
+            // 
+            // tabPdtAliExp
+            // 
+            this.tabPdtAliExp.Controls.Add(this.btnPdtExportAliExpReport);
+            this.tabPdtAliExp.Controls.Add(this.dataGridViewPdtAliExp);
+            this.tabPdtAliExp.Location = new System.Drawing.Point(4, 22);
+            this.tabPdtAliExp.Name = "tabPdtAliExp";
+            this.tabPdtAliExp.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPdtAliExp.Size = new System.Drawing.Size(589, 402);
+            this.tabPdtAliExp.TabIndex = 0;
+            this.tabPdtAliExp.Text = "Products From AliExpress";
+            this.tabPdtAliExp.UseVisualStyleBackColor = true;
+            // 
+            // tabPdtFromEbay
+            // 
+            this.tabPdtFromEbay.Controls.Add(this.btnPdtEbay);
+            this.tabPdtFromEbay.Controls.Add(this.dataGridViewPdtFromEbay);
+            this.tabPdtFromEbay.Location = new System.Drawing.Point(4, 22);
+            this.tabPdtFromEbay.Name = "tabPdtFromEbay";
+            this.tabPdtFromEbay.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPdtFromEbay.Size = new System.Drawing.Size(589, 402);
+            this.tabPdtFromEbay.TabIndex = 1;
+            this.tabPdtFromEbay.Text = "Products Form Ebay";
+            this.tabPdtFromEbay.UseVisualStyleBackColor = true;
+            // 
+            // tabsellerNames
+            // 
+            this.tabsellerNames.Controls.Add(this.btnExportSellerReport);
+            this.tabsellerNames.Controls.Add(this.dataGridViewSellerNameReport);
+            this.tabsellerNames.Location = new System.Drawing.Point(4, 22);
+            this.tabsellerNames.Name = "tabsellerNames";
+            this.tabsellerNames.Size = new System.Drawing.Size(589, 402);
+            this.tabsellerNames.TabIndex = 2;
+            this.tabsellerNames.Text = "Sellers Name";
+            this.tabsellerNames.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewSellerNameReport
+            // 
+            this.dataGridViewSellerNameReport.AllowUserToAddRows = false;
+            this.dataGridViewSellerNameReport.AllowUserToDeleteRows = false;
+            this.dataGridViewSellerNameReport.AllowUserToResizeColumns = false;
+            this.dataGridViewSellerNameReport.AllowUserToResizeRows = false;
+            this.dataGridViewSellerNameReport.AutoGenerateColumns = false;
+            this.dataGridViewSellerNameReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewSellerNameReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSellerNameReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.sellerNameDataGridViewTextBoxColumn,
+            this.SellerUrl});
+            this.dataGridViewSellerNameReport.DataSource = this.sellerNameScrapeBindingSource1;
+            this.dataGridViewSellerNameReport.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewSellerNameReport.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewSellerNameReport.Name = "dataGridViewSellerNameReport";
+            this.dataGridViewSellerNameReport.Size = new System.Drawing.Size(582, 332);
+            this.dataGridViewSellerNameReport.TabIndex = 0;
+            // 
+            // btnExportSellerReport
+            // 
+            this.btnExportSellerReport.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnExportSellerReport.Location = new System.Drawing.Point(480, 341);
+            this.btnExportSellerReport.Name = "btnExportSellerReport";
+            this.btnExportSellerReport.Size = new System.Drawing.Size(105, 34);
+            this.btnExportSellerReport.TabIndex = 1;
+            this.btnExportSellerReport.Text = "Export Excel";
+            this.btnExportSellerReport.UseVisualStyleBackColor = false;
+            this.btnExportSellerReport.Click += new System.EventHandler(this.btnExportSellerReport_Click);
+            // 
+            // btnPdtEbay
+            // 
+            this.btnPdtEbay.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnPdtEbay.Location = new System.Drawing.Point(478, 348);
+            this.btnPdtEbay.Name = "btnPdtEbay";
+            this.btnPdtEbay.Size = new System.Drawing.Size(105, 34);
+            this.btnPdtEbay.TabIndex = 3;
+            this.btnPdtEbay.Text = "Export Excel";
+            this.btnPdtEbay.UseVisualStyleBackColor = false;
+            this.btnPdtEbay.Click += new System.EventHandler(this.btnPdtEbay_Click);
+            // 
+            // dataGridViewPdtFromEbay
+            // 
+            this.dataGridViewPdtFromEbay.AllowUserToAddRows = false;
+            this.dataGridViewPdtFromEbay.AllowUserToDeleteRows = false;
+            this.dataGridViewPdtFromEbay.AllowUserToResizeColumns = false;
+            this.dataGridViewPdtFromEbay.AllowUserToResizeRows = false;
+            this.dataGridViewPdtFromEbay.AutoGenerateColumns = false;
+            this.dataGridViewPdtFromEbay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewPdtFromEbay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPdtFromEbay.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.productsNameDataGridViewTextBoxColumn,
+            this.productURLDataGridViewTextBoxColumn});
+            this.dataGridViewPdtFromEbay.DataSource = this.productsFromEbayBindingSource;
+            this.dataGridViewPdtFromEbay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewPdtFromEbay.Location = new System.Drawing.Point(3, 10);
+            this.dataGridViewPdtFromEbay.Name = "dataGridViewPdtFromEbay";
+            this.dataGridViewPdtFromEbay.ReadOnly = true;
+            this.dataGridViewPdtFromEbay.Size = new System.Drawing.Size(582, 332);
+            this.dataGridViewPdtFromEbay.TabIndex = 2;
+            // 
+            // btnPdtExportAliExpReport
+            // 
+            this.btnPdtExportAliExpReport.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnPdtExportAliExpReport.Location = new System.Drawing.Point(478, 348);
+            this.btnPdtExportAliExpReport.Name = "btnPdtExportAliExpReport";
+            this.btnPdtExportAliExpReport.Size = new System.Drawing.Size(105, 34);
+            this.btnPdtExportAliExpReport.TabIndex = 5;
+            this.btnPdtExportAliExpReport.Text = "Export Excel";
+            this.btnPdtExportAliExpReport.UseVisualStyleBackColor = false;
+            this.btnPdtExportAliExpReport.Click += new System.EventHandler(this.btnPdtExportAliExpReport_Click);
+            // 
+            // dataGridViewPdtAliExp
+            // 
+            this.dataGridViewPdtAliExp.AllowUserToAddRows = false;
+            this.dataGridViewPdtAliExp.AllowUserToDeleteRows = false;
+            this.dataGridViewPdtAliExp.AllowUserToResizeColumns = false;
+            this.dataGridViewPdtAliExp.AllowUserToResizeRows = false;
+            this.dataGridViewPdtAliExp.AutoGenerateColumns = false;
+            this.dataGridViewPdtAliExp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewPdtAliExp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPdtAliExp.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.itemsNameDataGridViewTextBoxColumn,
+            this.itemUrlDataGridViewTextBoxColumn,
+            this.categoryNameDataGridViewTextBoxColumn1});
+            this.dataGridViewPdtAliExp.DataSource = this.itemsNamesBindingSource;
+            this.dataGridViewPdtAliExp.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewPdtAliExp.Location = new System.Drawing.Point(3, 10);
+            this.dataGridViewPdtAliExp.Name = "dataGridViewPdtAliExp";
+            this.dataGridViewPdtAliExp.ReadOnly = true;
+            this.dataGridViewPdtAliExp.Size = new System.Drawing.Size(582, 332);
+            this.dataGridViewPdtAliExp.TabIndex = 4;
+            // 
+            // scrapeTestDataSet1
+            // 
+            this.scrapeTestDataSet1.DataSetName = "ScrapeTestDataSet1";
+            this.scrapeTestDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // itemsNamesBindingSource
+            // 
+            this.itemsNamesBindingSource.DataMember = "ItemsNames";
+            this.itemsNamesBindingSource.DataSource = this.scrapeTestDataSet1;
+            // 
+            // itemsNamesTableAdapter
+            // 
+            this.itemsNamesTableAdapter.ClearBeforeFill = true;
+            // 
+            // itemsNameDataGridViewTextBoxColumn
+            // 
+            this.itemsNameDataGridViewTextBoxColumn.DataPropertyName = "ItemsName";
+            this.itemsNameDataGridViewTextBoxColumn.HeaderText = "ItemsName";
+            this.itemsNameDataGridViewTextBoxColumn.Name = "itemsNameDataGridViewTextBoxColumn";
+            this.itemsNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // itemUrlDataGridViewTextBoxColumn
+            // 
+            this.itemUrlDataGridViewTextBoxColumn.DataPropertyName = "ItemUrl";
+            this.itemUrlDataGridViewTextBoxColumn.HeaderText = "ItemUrl";
+            this.itemUrlDataGridViewTextBoxColumn.Name = "itemUrlDataGridViewTextBoxColumn";
+            this.itemUrlDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // categoryNameDataGridViewTextBoxColumn1
+            // 
+            this.categoryNameDataGridViewTextBoxColumn1.DataPropertyName = "CategoryName";
+            this.categoryNameDataGridViewTextBoxColumn1.HeaderText = "CategoryName";
+            this.categoryNameDataGridViewTextBoxColumn1.Name = "categoryNameDataGridViewTextBoxColumn1";
+            this.categoryNameDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // scrapeTestDataSet2
+            // 
+            this.scrapeTestDataSet2.DataSetName = "ScrapeTestDataSet2";
+            this.scrapeTestDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // productsFromEbayBindingSource
+            // 
+            this.productsFromEbayBindingSource.DataMember = "ProductsFromEbay";
+            this.productsFromEbayBindingSource.DataSource = this.scrapeTestDataSet2;
+            // 
+            // productsFromEbayTableAdapter
+            // 
+            this.productsFromEbayTableAdapter.ClearBeforeFill = true;
+            // 
+            // productsNameDataGridViewTextBoxColumn
+            // 
+            this.productsNameDataGridViewTextBoxColumn.DataPropertyName = "ProductsName";
+            this.productsNameDataGridViewTextBoxColumn.HeaderText = "ProductsName";
+            this.productsNameDataGridViewTextBoxColumn.Name = "productsNameDataGridViewTextBoxColumn";
+            this.productsNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // productURLDataGridViewTextBoxColumn
+            // 
+            this.productURLDataGridViewTextBoxColumn.DataPropertyName = "ProductURL";
+            this.productURLDataGridViewTextBoxColumn.HeaderText = "ProductURL";
+            this.productURLDataGridViewTextBoxColumn.Name = "productURLDataGridViewTextBoxColumn";
+            this.productURLDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // scrapeTestDataSet3
+            // 
+            this.scrapeTestDataSet3.DataSetName = "ScrapeTestDataSet3";
+            this.scrapeTestDataSet3.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // sellerNameScrapeBindingSource1
+            // 
+            this.sellerNameScrapeBindingSource1.DataMember = "SellerNameScrape";
+            this.sellerNameScrapeBindingSource1.DataSource = this.scrapeTestDataSet3;
+            // 
+            // sellerNameScrapeTableAdapter1
+            // 
+            this.sellerNameScrapeTableAdapter1.ClearBeforeFill = true;
+            // 
+            // sellerNameDataGridViewTextBoxColumn
+            // 
+            this.sellerNameDataGridViewTextBoxColumn.DataPropertyName = "SellerName";
+            this.sellerNameDataGridViewTextBoxColumn.HeaderText = "SellerName";
+            this.sellerNameDataGridViewTextBoxColumn.Name = "sellerNameDataGridViewTextBoxColumn";
+            // 
+            // SellerUrl
+            // 
+            this.SellerUrl.DataPropertyName = "SellerUrl";
+            this.SellerUrl.HeaderText = "SellerUrl";
+            this.SellerUrl.Name = "SellerUrl";
+            // 
+            // paneProgressBar
+            // 
+            this.paneProgressBar.Controls.Add(this.progressBar);
+            this.paneProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.paneProgressBar.Location = new System.Drawing.Point(0, 501);
+            this.paneProgressBar.Name = "paneProgressBar";
+            this.paneProgressBar.Size = new System.Drawing.Size(805, 31);
+            this.paneProgressBar.TabIndex = 14;
+            // 
+            // progressBar
+            // 
+            this.progressBar.BackColor = System.Drawing.SystemColors.Desktop;
+            this.progressBar.Location = new System.Drawing.Point(9, 0);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(698, 31);
+            this.progressBar.TabIndex = 0;
+            // 
+            // TimerProgressBar
+            // 
+            this.TimerProgressBar.Tick += new System.EventHandler(this.TimerProgressBar_Tick);
+            // 
             // ScrapperPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(805, 532);
+            this.Controls.Add(this.paneProgressBar);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScrapperPage";
@@ -1063,8 +1413,6 @@ namespace Desktop_Scrapping
             this.tabControl.ResumeLayout(false);
             this.tabScrapCat.ResumeLayout(false);
             this.tabScrapCat.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel15.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel14.ResumeLayout(false);
@@ -1085,7 +1433,7 @@ namespace Desktop_Scrapping
             this.tabBrands.ResumeLayout(false);
             this.Brands.ResumeLayout(false);
             this.Brands.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBrand)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.brandTableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSetBrandTable)).EndInit();
             this.panel7.ResumeLayout(false);
@@ -1103,6 +1451,24 @@ namespace Desktop_Scrapping
             this.tabHome.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
+            this.panel20.ResumeLayout(false);
+            this.panel20.PerformLayout();
+            this.tabReports.ResumeLayout(false);
+            this.tabPdtAliExp.ResumeLayout(false);
+            this.tabPdtFromEbay.ResumeLayout(false);
+            this.tabsellerNames.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSellerNameReport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPdtFromEbay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPdtAliExp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsNamesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productsFromEbayBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scrapeTestDataSet3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sellerNameScrapeBindingSource1)).EndInit();
+            this.paneProgressBar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1157,10 +1523,8 @@ namespace Desktop_Scrapping
         private System.Windows.Forms.Button btnBrandDel;
         private System.Windows.Forms.Button btnBrandEdit;
         private System.Windows.Forms.Label lblBrandName;
-        private System.Windows.Forms.Label lblBrandID;
         private System.Windows.Forms.TextBox txtBrandName;
-        private System.Windows.Forms.TextBox txtBrandID;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridViewBrand;
         private System.Windows.Forms.Button btnCatSave;
         private System.Windows.Forms.Button btnCatDelete;
         private System.Windows.Forms.Button btnCatEdit;
@@ -1172,8 +1536,6 @@ namespace Desktop_Scrapping
         private ScrapeTestDataSetBrandTable scrapeTestDataSetBrandTable;
         private System.Windows.Forms.BindingSource brandTableBindingSource;
         private ScrapeTestDataSetBrandTableTableAdapters.Brand_TableTableAdapter brand_TableTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn brandIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn brandNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel16;
@@ -1184,8 +1546,6 @@ namespace Desktop_Scrapping
         private System.Windows.Forms.Label lblSearchInfo;
         private System.Windows.Forms.Label lblScrapNameItemsInfo;
         private System.Windows.Forms.Label lblBrandsSomeDetail;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Label lblItemName;
         private System.Windows.Forms.Panel panel19;
         private System.Windows.Forms.GroupBox GrpBoxItemNameScrap;
         private System.Windows.Forms.TextBox txtMinimumPrice;
@@ -1197,6 +1557,45 @@ namespace Desktop_Scrapping
         private System.Windows.Forms.Label lblItemNam;
         private System.Windows.Forms.TextBox txtItemName;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtScrapID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn brandNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Brand_ID;
+        private System.Windows.Forms.TextBox txtBrandID;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tabReports;
+        private System.Windows.Forms.TabPage tabPdtAliExp;
+        private System.Windows.Forms.Button btnPdtExportAliExpReport;
+        private System.Windows.Forms.DataGridView dataGridViewPdtAliExp;
+        private System.Windows.Forms.TabPage tabPdtFromEbay;
+        private System.Windows.Forms.Button btnPdtEbay;
+        private System.Windows.Forms.DataGridView dataGridViewPdtFromEbay;
+        private System.Windows.Forms.TabPage tabsellerNames;
+        private System.Windows.Forms.Button btnExportSellerReport;
+        private System.Windows.Forms.Panel panel21;
+        private System.Windows.Forms.Panel panel15;
+        private System.Windows.Forms.Panel panel20;
+        private System.Windows.Forms.Label label3;
+        private ScrapeTestDataSet1 scrapeTestDataSet1;
+        private System.Windows.Forms.BindingSource itemsNamesBindingSource;
+        private ScrapeTestDataSet1TableAdapters.ItemsNamesTableAdapter itemsNamesTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemsNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemUrlDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoryNameDataGridViewTextBoxColumn1;
+        private ScrapeTestDataSet2 scrapeTestDataSet2;
+        private System.Windows.Forms.BindingSource productsFromEbayBindingSource;
+        private ScrapeTestDataSet2TableAdapters.ProductsFromEbayTableAdapter productsFromEbayTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productsNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productURLDataGridViewTextBoxColumn;
+        private ScrapeTestDataSet3 scrapeTestDataSet3;
+        private System.Windows.Forms.BindingSource sellerNameScrapeBindingSource1;
+        private ScrapeTestDataSet3TableAdapters.SellerNameScrapeTableAdapter sellerNameScrapeTableAdapter1;
+        private System.Windows.Forms.DataGridView dataGridViewSellerNameReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellerNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SellerUrl;
+        private System.Windows.Forms.Panel paneProgressBar;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Timer TimerProgressBar;
     }
 }
 

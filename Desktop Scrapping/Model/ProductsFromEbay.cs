@@ -16,5 +16,7 @@ namespace Desktop_Scrapping.Model
     {
         public int ProductsID { get; set; }
         public string ProductsName { get; set; }
+        public Nullable<int> ScrapID { get; set; }
+        public string ProductURL { get; set; }
     }
 }

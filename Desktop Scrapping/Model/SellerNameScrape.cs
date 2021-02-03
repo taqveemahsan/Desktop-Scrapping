@@ -18,7 +18,5 @@ namespace Desktop_Scrapping.Model
         public string SellerName { get; set; }
         public Nullable<int> ScrapID { get; set; }
         public string SellerUrl { get; set; }
-    
-        public virtual ScrapDataTime ScrapDataTime { get; set; }
     }
 }
